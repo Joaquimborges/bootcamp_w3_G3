@@ -28,9 +28,10 @@ public class VendedorController {
         return new ResponseEntity<>(VendedorDTO.converter(vendedor), HttpStatus.CREATED);
     }
 
-    @GetMapping("/obter/{id}")
-    public ResponseEntity<VendedorDTO> obter(@PathVariable Integer codigo){
-        Vendedor vendedor = vendedorService.obter(codigo);
+    @GetMapping("/obter/{codigo}")
+    public ResponseEntity<VendedorDTO> obter(@PathVariable String codigo){
+        Vendedor vendedor = vendedorService.obter(
+                codigo);
         return new ResponseEntity<>(VendedorDTO.converter(vendedor), HttpStatus.OK);
     }
 

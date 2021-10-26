@@ -15,11 +15,11 @@ import java.util.List;
 @Getter
 public class VendedorDTO {
 
-    private Integer codigo;
+    private String codigo;
     private String nome;
     private String sobrenome;
 
-    public VendedorDTO(Integer codigo, String nome, String sobrenome) {
+    public VendedorDTO(String codigo, String nome, String sobrenome) {
         this.codigo = codigo;
         this.nome = nome;
         this.sobrenome = sobrenome;

@@ -24,8 +24,8 @@ public class RepresentanteController {
             return new ResponseEntity<>(RepresentanteDTO.converteEmRepresentanteDTO(representante), HttpStatus.CREATED);
         }
 
-        @GetMapping("/obter/{id}")
-        public ResponseEntity<RepresentanteDTO> obter(@PathVariable Integer codigo) {
+        @GetMapping("/obter/{codigo}")
+        public ResponseEntity<RepresentanteDTO> obter(@PathVariable String codigo) {
             Representante representante = representanteService.obter(codigo);
             return new ResponseEntity<>(RepresentanteDTO.converteEmRepresentanteDTO(representante), HttpStatus.OK);
         }
@@ -42,8 +42,8 @@ public class RepresentanteController {
             return new ResponseEntity<>(RepresentanteDTO.converteEmRepresentanteDTO(representante), HttpStatus.OK);
         }
 
-        @DeleteMapping("/apagar")
-        public ResponseEntity<RepresentanteDTO> apagar(@PathVariable Integer codigo){
+        @DeleteMapping("/apagar/{codigo}")
+        public ResponseEntity<RepresentanteDTO> apagar(@PathVariable String codigo){
             Representante representante = representanteService.apagar(codigo);
             return new ResponseEntity<>(RepresentanteDTO.converteEmRepresentanteDTO(representante), HttpStatus.ACCEPTED);
         }

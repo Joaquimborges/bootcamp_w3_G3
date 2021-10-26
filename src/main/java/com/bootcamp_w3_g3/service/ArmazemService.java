@@ -57,7 +57,7 @@ public class ArmazemService {
     }
 
     public List<Setor> listarSetores() {
-        return setorService.listar();
+        return setorService.listarSetores();
     }
 
 }

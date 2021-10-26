@@ -1,16 +1,16 @@
 package com.bootcamp_w3_g3.model.dtos.request;
 
-import com.bootcamp_w3_g3.model.entity.Armazem;
-import com.bootcamp_w3_g3.model.entity.Lote;
-import com.bootcamp_w3_g3.model.entity.OrdemDeEntrada;
-import com.bootcamp_w3_g3.model.entity.Setor;
-import com.fasterxml.jackson.annotation.JsonProperty;
+
+import com.bootcamp_w3_g3.model.entity.*;
+import com.bootcamp_w3_g3.service.RepresentanteService;
+import com.bootcamp_w3_g3.service.SetorService;
+import com.bootcamp_w3_g3.service.VendedorService;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
-import java.util.List;
+
 
 /**
  * @author Joaquim Borges
@@ -20,30 +20,43 @@ import java.util.List;
 @NoArgsConstructor
 public class OrdemDeEntradaDTO {
 
-    private Integer numeroDaOrdem;
-    private LocalDate dataDaOrdem;
-
-    @JsonProperty("setor_id")
+    private Integer numeroOrdem;
     private String codigoSetor;
+    private String codigoRepresentante;
+    private String codigoVendedor;
+    private Integer quantidade;
+    private Produto produto;
+    private LocalDate dataFabricacao;
+    private LocalDate dataVencimento;
+    private LocalDate dataOrdem;
 
-    @JsonProperty("armazem_id")
-    private String codigoArmazem;
 
-    private List<Lote> loteList;
+    /**
+     * construindo o payload da ordem de entrada
+     */
+    public OrdemDeEntrada converte(SetorService setorService, RepresentanteService representanteService,
+                                   VendedorService vendedorService) {
 
-    public OrdemDeEntrada converterParaEntity() {
-        return OrdemDeEntrada.builder()
-                .numeroDaOrdem(numeroDaOrdem)
-                .dataDaOrdem(dataDaOrdem)
-                .codigoSetor(new Setor(codigoSetor))
-                .codigoArmazem(new Armazem(codigoArmazem))
-                .loteList(loteList)
+        Vendedor vendedor = vendedorService.obter(codigoVendedor);
+        Representante representante = representanteService.obter(codigoRepresentante);
+        Setor setor = setorService.obterSetor(codigoSetor);
+
+        Lote lote = Lote.builder()
+                .quantidadeAtual(quantidade)
+                .produtos(produto)
+                .dataDeFabricacao(dataFabricacao)
+                .dataDeValidade(dataVencimento)
                 .build();
 
+        return OrdemDeEntrada.builder()
+                .dataDaOrdem(dataOrdem)
+                .numeroDaOrdem(numeroOrdem)
+                .representante(representante)
+                .setor(setor)
+                .vendedor(vendedor)
+                .lote(lote).build();
     }
 
-    public List<Lote> retorna(OrdemDeEntradaDTO ordemDeEntradaDTO){
-        return ordemDeEntradaDTO.loteList;
-    }
+
 
 }

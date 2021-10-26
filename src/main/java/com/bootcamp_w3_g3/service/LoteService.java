@@ -2,7 +2,6 @@ package com.bootcamp_w3_g3.service;
 
 
 import com.bootcamp_w3_g3.model.entity.Lote;
-import com.bootcamp_w3_g3.model.entity.Representante;
 import com.bootcamp_w3_g3.repository.LoteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,6 +11,7 @@ import java.util.List;
 
 /**
  * @author Joaquim Borges
+ * @autor  Alex Cruz
  */
 
 @Service
@@ -29,14 +29,7 @@ public class LoteService {
     }
 
 
-    /**
-     * metodo auxiliar para validar o representante ao acessar o lote
-     */
-    private boolean representanteExiste(Integer codigo) {
 
-        return armazemService.buscarRepresentante(codigo).getCodigo().equals(codigo);
-
-    }
 
     public Lote salvar(Lote lote) {
         return loteRepository.save(lote);
@@ -52,8 +45,14 @@ public class LoteService {
 
     public Lote atualizar(Lote lote) {
         Lote editedLote = loteRepository.findByNumero(lote.getNumero());
+
+        editedLote.setTemperaturaAtual(lote.getTemperaturaAtual());
+        editedLote.setTemperaturaMinima(lote.getTemperaturaMinima());
+        editedLote.setQuantidadeAtual(lote.getQuantidadeAtual());
+        editedLote.setQuantidadeMinina(lote.getQuantidadeMinina());
+        editedLote.setDataDeFabricacao(lote.getDataDeFabricacao());
+        editedLote.setHoraFabricacao(lote.getHoraFabricacao());
         editedLote.setDataDeValidade(lote.getDataDeValidade());
-        editedLote.setQuantidadeDeIntens(lote.getQuantidadeDeIntens());
 
         return loteRepository.save(editedLote);
     }

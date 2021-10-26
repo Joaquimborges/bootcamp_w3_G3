@@ -26,6 +26,7 @@ public class Armazem {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+
     private String codArmazem;
 
     private String nome;

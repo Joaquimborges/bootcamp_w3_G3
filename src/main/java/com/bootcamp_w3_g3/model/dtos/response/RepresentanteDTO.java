@@ -18,14 +18,14 @@ import java.util.List;
 @Getter
 public class RepresentanteDTO {
 
-    private Integer codigo;
+    private String codigo;
     private String nome;
     private String sobreNome;
 
     public RepresentanteDTO() {
     }
 
-    public RepresentanteDTO(Integer codigo, String nome, String sobreNome) {
+    public RepresentanteDTO(String codigo, String nome, String sobreNome) {
         this.codigo = codigo;
         this.nome = nome;
         this.sobreNome = sobreNome;

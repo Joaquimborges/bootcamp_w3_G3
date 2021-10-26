@@ -13,31 +13,38 @@ import java.util.List;
 @Service
 public class SetorService {
 
-    private SetorRepository setorRepository;
+    private final SetorRepository setorRepository;
 
     @Autowired
     public SetorService(SetorRepository setorRepository){
         this.setorRepository = setorRepository;
     }
 
-    public Setor salvar(Setor setor){
+    public Setor salvarSetor(Setor setor){
         return setorRepository.save(setor);
     }
 
-    public Setor obter(String codigo){
+    public Setor obterSetor(String codigo){
         return setorRepository.findByCodigo(codigo);
     }
 
-    public List<Setor> listar(){
+    public List<Setor> listarSetores(){
         return setorRepository.findAll();
     }
 
-    public Setor atualizar(Setor setor){
+    public Setor atualizarSetor(Setor setor){
         Setor editedSetor = setorRepository.findByCodigo(setor.getCodigo());
+
+        editedSetor.setCodigo(setor.getCodigo());
+        editedSetor.setNome(setor.getNome());
         editedSetor.setTipoProduto(setor.getTipoProduto());
-        editedSetor.setRepresentante(setor.getRepresentante());
+        editedSetor.setArmazem(setor.getArmazem());
 
         return setorRepository.save(editedSetor);
+    }
+
+    public Setor removerSetor(String codigo) {
+        return setorRepository.deleteByCodigo(codigo);
     }
 
 }

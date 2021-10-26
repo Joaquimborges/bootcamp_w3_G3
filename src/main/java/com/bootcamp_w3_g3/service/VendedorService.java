@@ -26,7 +26,7 @@ public class VendedorService {
         return vendedorRepository.save(Vendedor);
     }
 
-    public Vendedor obter(Integer codigo) {
+    public Vendedor obter(String codigo) {
         return vendedorRepository.findByCodigo(codigo);
     }
 
@@ -42,7 +42,7 @@ public class VendedorService {
         return vendedorRepository.save(editedVendedor);
     }
 
-    public Vendedor apagar(Integer codigo) {
+    public Vendedor apagar(String codigo) {
         return vendedorRepository.deleteByCodigo(codigo);
     }
 

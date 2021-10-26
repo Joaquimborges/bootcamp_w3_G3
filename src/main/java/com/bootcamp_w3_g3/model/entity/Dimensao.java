@@ -1,6 +1,7 @@
 package com.bootcamp_w3_g3.model.entity;
 
 
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -14,6 +15,7 @@ import javax.persistence.*;
  */
 
 
+@NoArgsConstructor
 @Embeddable
 @Setter
 public class Dimensao {

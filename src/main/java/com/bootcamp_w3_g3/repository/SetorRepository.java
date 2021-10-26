@@ -7,4 +7,6 @@ public interface SetorRepository extends JpaRepository<Setor, Long> {
 
     Setor findByCodigo(String codigo);
 
+    Setor deleteByCodigo(String codigo);
+
 }

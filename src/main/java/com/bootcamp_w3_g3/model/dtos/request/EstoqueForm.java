@@ -21,4 +21,6 @@ public class EstoqueForm {
     public Estoque converte() {
         return new Estoque(tipoDeProduto, quantidade, codEstoque);
     }
+
+
 }

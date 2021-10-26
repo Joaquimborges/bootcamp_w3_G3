@@ -28,7 +28,7 @@ public class RepresentanteService {
         return representanteRepository.save(representante);
     }
 
-    public Representante obter(Integer codigo) { return representanteRepository.findByCodigo(codigo); }
+    public Representante obter(String codigo) { return representanteRepository.findByCodigo(codigo); }
 
     public List<Representante> listar() {
         return representanteRepository.findAll();
@@ -42,7 +42,7 @@ public class RepresentanteService {
         return representanteRepository.save(representanteEdited);
     }
 
-    public Representante apagar(Integer codigo) {
+    public Representante apagar(String codigo) {
         return representanteRepository.deleteByCodigo(codigo);
     }
 }

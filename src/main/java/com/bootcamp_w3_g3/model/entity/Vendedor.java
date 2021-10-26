@@ -24,7 +24,7 @@ public class Vendedor extends Pessoa {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Integer codigo;
+    private String codigo;
 
     public Vendedor(String nome, String sobrenome, String cpf, String telefone, String endereco) {
         super(nome, sobrenome, cpf, telefone, endereco);

@@ -11,8 +11,8 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface VendedorRepository extends JpaRepository<Vendedor, Long> {
 
-    Vendedor findByCodigo(Integer codigo);
+    Vendedor findByCodigo(String codigo);
 
-    Vendedor deleteByCodigo(Integer codigo);
+    Vendedor deleteByCodigo(String codigo);
 
 }

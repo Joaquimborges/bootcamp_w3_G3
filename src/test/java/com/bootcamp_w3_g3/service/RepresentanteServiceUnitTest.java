@@ -23,12 +23,12 @@ public class RepresentanteServiceUnitTest {
 
     RepresentanteRepository representanteRepository = Mockito.mock(RepresentanteRepository.class);
 
-    Representante representante = new Representante("Alex","Cruz","2345678910","5555555","Rua Joao neves 18");
-    Representante representante2 = new Representante("Alex","Cruz","2345678910","5555555","Rua Joao neves 18");
+    Representante representante     = new Representante("Alex","Cruz","2345678910","5555555","Rua Joao neves 18");
+    Representante representante2    = new Representante("Alex","Cruz","2345678910","5555555","Rua Joao neves 18");
     List<Representante> representantesList = new ArrayList<>();
 
     @Test
-    void salvarTest(){
+    void salvarRepresentanteTest(){
         Mockito.when(representanteRepository.save(Mockito.any(Representante.class))).thenReturn(representante);
 
         representanteService = new RepresentanteService(representanteRepository);
@@ -40,9 +40,11 @@ public class RepresentanteServiceUnitTest {
     }
 
     @Test
-    void obterTest(){
-        representante.setCodigo(25);
-        Mockito.when(representanteRepository.findByCodigo(Mockito.any(Integer.class))).thenReturn(representante);
+
+    void obterRepresentanteTest(){
+
+        representante.setCodigo("25");
+        Mockito.when(representanteRepository.findByCodigo(Mockito.any(String.class))).thenReturn(representante);
 
         representanteService = new RepresentanteService(representanteRepository);
         Representante obtido = representanteService.obter(representante.getCodigo());
@@ -55,7 +57,7 @@ public class RepresentanteServiceUnitTest {
     }
 
     @Test
-    void listarTest(){
+    void listarRepresentanteTest(){
         representantesList.add(representante);
         representantesList.add(representante2);
         Mockito.when(representanteRepository.findAll()).thenReturn(representantesList);
@@ -70,12 +72,12 @@ public class RepresentanteServiceUnitTest {
     }
 
     @Test
-    void atualizarTest(){
+    void atualizarRepresentanteTest(){
         representante.setId(22222L);
-        representante.setCodigo(25);
+        representante.setCodigo("25");
         representante.setTelefone("777777777");
         representante.setEndereco("Rua A");
-        Mockito.when(representanteRepository.getByCodigo(Mockito.any(Integer.class))).thenReturn(representante);
+        Mockito.when(representanteRepository.getByCodigo(Mockito.any(String.class))).thenReturn(representante);
         Mockito.when(representanteRepository.save(Mockito.any(Representante.class))).thenReturn(representante);
 
         representanteService = new RepresentanteService(representanteRepository);
@@ -90,9 +92,11 @@ public class RepresentanteServiceUnitTest {
     }
 
    @Test
-   void apagarTest(){
-       representante.setCodigo(25);
-       Mockito.when(representanteRepository.deleteByCodigo(Mockito.any(Integer.class))).thenReturn(null);
+
+   void apagarRepresentanteTest(){
+
+       representante.setCodigo("25");
+       Mockito.when(representanteRepository.deleteByCodigo(Mockito.any(String.class))).thenReturn(null);
 
        representanteService = new RepresentanteService(representanteRepository);
        Representante deletado = representanteService.apagar(representante.getCodigo());

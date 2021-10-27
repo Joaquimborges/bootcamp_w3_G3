@@ -1,8 +1,6 @@
 package com.bootcamp_w3_g3.model.dtos.response;
 
-import com.bootcamp_w3_g3.model.entity.Dimensao;
 import com.bootcamp_w3_g3.model.entity.Produto;
-import com.bootcamp_w3_g3.model.entity.Representante;
 import lombok.Getter;
 
 import java.math.BigDecimal;
@@ -24,18 +22,17 @@ public class ProdutoDTO {
     private BigDecimal preco;
     private LocalDate dataDeValidadae;
     private Double temperaturaIndicada;
-    private Dimensao dimensoes;
 
     public ProdutoDTO() {
     }
 
-    public ProdutoDTO(Integer codigoDoProduto, String nome, BigDecimal preco, LocalDate dataDeValidadae, Double temperaturaIndicada, Dimensao dimensoes) {
+    public ProdutoDTO(Integer codigoDoProduto, String nome, BigDecimal preco, LocalDate dataDeValidadae, Double temperaturaIndicada) {
         this.codigoDoProduto = codigoDoProduto;
         this.nome = nome;
         this.preco = preco;
         this.dataDeValidadae = dataDeValidadae;
         this.temperaturaIndicada = temperaturaIndicada;
-        this.dimensoes = dimensoes;
+
     }
 
     /**
@@ -50,8 +47,7 @@ public class ProdutoDTO {
                                 produto.getNome(),
                                 produto.getPreco(),
                                 produto.getDataDeValidadae(),
-                                produto.getTemperaturaIndicada(),
-                                new Dimensao(dimensoes.getComprimento(),dimensoes.getAltura(), dimensoes.getLargura()));
+                                produto.getTemperaturaIndicada());
     }
 
     /**
@@ -70,10 +66,7 @@ public class ProdutoDTO {
                                     produto.getNome(),
                                     produto.getPreco(),
                                     produto.getDataDeValidadae(), 
-                                    produto.getTemperaturaIndicada(),
-                                    new Dimensao(produto.getDimensoes().getComprimento(),
-                                    produto.getDimensoes().getAltura(),
-                                    produto.getDimensoes().getLargura())));
+                                    produto.getTemperaturaIndicada()));
         }
         return produtoDTOList;
     }

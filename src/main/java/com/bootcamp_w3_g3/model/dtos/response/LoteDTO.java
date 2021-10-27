@@ -1,6 +1,5 @@
 package com.bootcamp_w3_g3.model.dtos.response;
 
-import com.bootcamp_w3_g3.model.entity.Dimensao;
 import com.bootcamp_w3_g3.model.entity.Lote;
 import com.bootcamp_w3_g3.model.entity.Produto;
 import lombok.AllArgsConstructor;
@@ -29,8 +28,6 @@ public class LoteDTO {
 
     private Integer quantidadeAtual;
     private  Integer quantidadeMinina;
-
-    private Dimensao dimensao;
 
     private Produto produto;
 

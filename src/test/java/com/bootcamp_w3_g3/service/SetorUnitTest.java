@@ -1,7 +1,6 @@
 package com.bootcamp_w3_g3.service;
 
 import com.bootcamp_w3_g3.model.entity.Armazem;
-import com.bootcamp_w3_g3.model.entity.Dimensao;
 import com.bootcamp_w3_g3.model.entity.Representante;
 import com.bootcamp_w3_g3.model.entity.Setor;
 import com.bootcamp_w3_g3.repository.SetorRepository;
@@ -30,10 +29,19 @@ public class SetorUnitTest {
     Armazem armazem1 = new Armazem("1234-meli", "cd cajamar",  "rua das cabras", "SP",  representante1,  setorList );
 
 
-    Setor setor1 = new Setor(
-            "123","Setor123", "Frescos",  new Dimensao(10.0,10.0,10.0), armazem1);
+    Setor setor1 = Setor.builder()
+            .codigo("123")
+            .nome("Setor123")
+            .tipoProduto("Frescos")
+            .armazem(armazem1).build();
 
-    Setor setor2 = new Setor("124","Setor124", "Congelados",  new Dimensao(20.0,20.0,20.0), armazem1 );
+
+    Setor setor2 = Setor.builder()
+            .codigo("124")
+            .nome("Setor124")
+            .tipoProduto("Congelados")
+            .armazem(armazem1).build();
+
 
 
     @Test

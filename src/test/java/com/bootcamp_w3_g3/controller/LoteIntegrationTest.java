@@ -1,7 +1,6 @@
 package com.bootcamp_w3_g3.controller;
 
 
-import com.bootcamp_w3_g3.model.entity.Dimensao;
 import com.bootcamp_w3_g3.model.entity.Lote;
 import com.bootcamp_w3_g3.model.entity.Produto;
 import com.bootcamp_w3_g3.repository.LoteRepository;
@@ -22,8 +21,6 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 
 import static org.hamcrest.Matchers.is;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
@@ -57,35 +54,29 @@ public class LoteIntegrationTest {
     }
 
     private Lote alterarDadosDoPayloadValido(){
-        List<Produto> produtos = new ArrayList<>();
+
         Produto produto = new Produto(123, "carne", new BigDecimal(60), LocalDate.now(),
-                16.0, new Dimensao(1.1, 1.2, 1.0));
-        produtos.add(produto);
+                16.0);
 
         return Lote.builder()
                 .id(1L)
                 .numero(9)
                 .dataDeValidade(LocalDate.now())
-                .dimensao(new Dimensao(1.1, 2.0, 1.0))
-                .produtos(produtos)
-                .quantidadeDeIntens(3)
+                .produtos(produto)
+                .quantidadeAtual(3)
                 .build();
     }
 
     private Lote criarPayloadValido(){
-        List<Produto> produtos = new ArrayList<>();
         Produto produto = new Produto(123, "carne", new BigDecimal(60), LocalDate.now(),
-                16.0, new Dimensao(1.1, 1.2, 1.0));
-
-        produtos.add(produto);
+                16.0);
 
         return    Lote.builder()
                 .id(1L)
                 .numero(9)
                 .dataDeValidade(LocalDate.now())
-                .dimensao(new Dimensao(1.1, 2.0, 1.0))
-                .produtos(produtos)
-                .quantidadeDeIntens(1)
+                .produtos(produto)
+                .quantidadeAtual(1)
                 .build();
     }
 
@@ -141,7 +132,7 @@ public class LoteIntegrationTest {
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(requestPayload))
                         .andExpect(status().isOk())
-                        .andExpect(jsonPath("$.quantidadeDeIntens", is(loteAlterado.getQuantidadeDeIntens())));
+                        .andExpect(jsonPath("$.quantidadeAtual", is(loteAlterado.getQuantidadeAtual())));
 
 
 

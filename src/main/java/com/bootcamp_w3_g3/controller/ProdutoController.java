@@ -86,7 +86,6 @@ public class ProdutoController {
     {
                Produto editedProduto = (produtoService.obter(cod_prod));
 
-               editedProduto.setDimensoes(produto.getDimensoes());
                editedProduto.setPreco(produto.getPreco());
                editedProduto.setNome(produto.getNome());
                editedProduto.setTemperaturaIndicada(produto.getTemperaturaIndicada());

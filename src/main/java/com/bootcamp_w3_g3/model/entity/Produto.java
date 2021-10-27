@@ -30,18 +30,15 @@ public class Produto {
     @ManyToOne
     private Lote lote;
 
-    @Embedded
-    private Dimensao dimensoes;
 
     public Produto(){}
 
-    public Produto(Integer codigoDoProduto, String nome, BigDecimal preco, LocalDate dataDeValidadae, Double temperaturaIndicada, Dimensao dimensoes) {
+    public Produto(Integer codigoDoProduto, String nome, BigDecimal preco, LocalDate dataDeValidadae, Double temperaturaIndicada) {
         this.codigoDoProduto = codigoDoProduto;
         this.nome = nome;
         this.preco = preco;
         this.dataDeValidadae = dataDeValidadae;
         this.temperaturaIndicada = temperaturaIndicada;
-        this.dimensoes = dimensoes;
     }
 
 

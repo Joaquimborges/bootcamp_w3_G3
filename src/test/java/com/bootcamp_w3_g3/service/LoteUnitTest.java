@@ -1,15 +1,12 @@
 package com.bootcamp_w3_g3.service;
 
 
-import com.bootcamp_w3_g3.model.entity.Dimensao;
 import com.bootcamp_w3_g3.model.entity.Lote;
 import com.bootcamp_w3_g3.model.entity.Produto;
 import com.bootcamp_w3_g3.repository.LoteRepository;
 
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
-
-
 
 
 import java.math.BigDecimal;
@@ -33,21 +30,22 @@ public class LoteUnitTest {
    private final ArmazemService armazemService = Mockito.mock(ArmazemService.class);
    private final LoteRepository loteRepository = Mockito.mock(LoteRepository.class);
 
+    Produto produto = new Produto(123, "carne", new BigDecimal(60), LocalDate.now(),
+            16.0);
+
 
    Lote lote = Lote.builder()
            .numero(10)
            .dataDeValidade(LocalDate.now())
-           .dimensao(new Dimensao(1.1, 2.0, 1.2))
-           .produtos(new ArrayList<>())
-           .quantidadeDeIntens(5)
+           .produtos(produto)
+           .quantidadeAtual(5)
            .build();
 
    Lote lote1 = Lote.builder()
            .numero(9)
            .dataDeValidade(LocalDate.now())
-           .dimensao(new Dimensao(1.1, 2.0, 1.2))
-           .produtos(new ArrayList<>())
-           .quantidadeDeIntens(5)
+           .produtos(produto)
+           .quantidadeAtual(5)
            .build();
 
     /**

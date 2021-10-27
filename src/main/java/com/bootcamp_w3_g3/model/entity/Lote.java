@@ -34,9 +34,6 @@ public class Lote {
     private LocalDate dataDeFabricacao;
     private LocalDate dataDeValidade;
 
-    @Embedded
-    private Dimensao dimensao;
-
     @OneToOne
     private Produto produtos;
 

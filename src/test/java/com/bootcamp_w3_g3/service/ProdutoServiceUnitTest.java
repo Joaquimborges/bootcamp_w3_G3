@@ -1,9 +1,7 @@
 package com.bootcamp_w3_g3.service;
 
-import com.bootcamp_w3_g3.model.entity.Dimensao;
 import com.bootcamp_w3_g3.model.entity.Produto;
 import com.bootcamp_w3_g3.repository.ProdutoRepository;
-import com.bootcamp_w3_g3.service.ProdutoService;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
@@ -26,11 +24,9 @@ public class ProdutoServiceUnitTest {
 
     ProdutoRepository produtoRepository = Mockito.mock(ProdutoRepository.class);
     Produto produto = new Produto(12345, "Lasanha",
-                                    new BigDecimal("23.45"), LocalDate.now(), 12.05,
-                                    new Dimensao(0.20,0.20,0.05));
+                                    new BigDecimal("23.45"), LocalDate.now(), 12.05);
     Produto produto2 = new Produto(67890, "Arroz",
-            new BigDecimal("13.45"), LocalDate.now(), 12.05,
-            new Dimensao(0.50,0.40,0.10));
+            new BigDecimal("13.45"), LocalDate.now(), 12.05);
 
 
     List<Produto> produtosList = new ArrayList<>();

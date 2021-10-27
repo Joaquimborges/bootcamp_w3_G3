@@ -1,7 +1,5 @@
 package com.bootcamp_w3_g3.model.dtos.request;
 
-import com.bootcamp_w3_g3.model.entity.Dimensao;
-
 import com.bootcamp_w3_g3.model.entity.Lote;
 import com.bootcamp_w3_g3.model.entity.Produto;
 
@@ -28,7 +26,6 @@ public class LoteForm {
     private Integer quantidadeAtual;
     private  Integer quantidadeMinina;
 
-    private Dimensao dimensao;
 
     private Produto produto;
 
@@ -50,7 +47,6 @@ public class LoteForm {
                 .dataDeFabricacao(dataDeFabricacao)
                 .horaFabricacao(horaFabricacao)
                 .dataDeValidade(dataDeValidade)
-                .dimensao(dimensao)
                 .build();
 
     }

@@ -1,7 +1,6 @@
 package com.bootcamp_w3_g3.model.entity;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -15,6 +14,9 @@ import java.time.LocalDate;
 @Getter
 @Setter
 @Entity
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Produto {
 
 
@@ -31,15 +33,6 @@ public class Produto {
     private Lote lote;
 
 
-    public Produto(){}
-
-    public Produto(Integer codigoDoProduto, String nome, BigDecimal preco, LocalDate dataDeValidadae, Double temperaturaIndicada) {
-        this.codigoDoProduto = codigoDoProduto;
-        this.nome = nome;
-        this.preco = preco;
-        this.dataDeValidadae = dataDeValidadae;
-        this.temperaturaIndicada = temperaturaIndicada;
-    }
 
 
 }

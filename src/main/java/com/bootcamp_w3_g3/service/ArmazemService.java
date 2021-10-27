@@ -12,14 +12,18 @@ import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.List;
 
 @NoArgsConstructor
 @Service
 public class ArmazemService {
 
+    @Autowired
     private SetorService setorService;
 
+    @Autowired
     private ArmazemRepository armazemRepository;
 
     @Autowired
@@ -27,6 +31,7 @@ public class ArmazemService {
         this.armazemRepository = armazemRepository;
     }
 
+    @Transactional
     public Armazem criarArmazem(Armazem armazem){
         return armazemRepository.save(armazem);
     }
@@ -52,12 +57,35 @@ public class ArmazemService {
 
     }
 
-    public Representante buscarRepresentante(Integer codigo) {
-        return armazemRepository.findByRepresentanteCodigo(codigo);
-    }
-
     public List<Setor> listarSetores() {
         return setorService.listarSetores();
     }
+
+    public List<Armazem> listarArmazens() {
+       return armazemRepository.findAll();
+    }
+
+
+    public Representante retornaRepresentanteDoArmazem(String codigoRepresentante) {
+        for (Armazem armazem : listarArmazens()){
+            if (armazem.getRepresentante().getCodigo().equals(codigoRepresentante)){
+                return armazem.getRepresentante();
+            }
+        }
+        return null;
+    }
+
+   public Setor retornaSetorDoArmazem(String codigoDoSetor) {
+       List<Setor> setorList = new ArrayList<>();
+       for (Armazem armazem : listarArmazens()) {
+           setorList = armazem.getSetoresDoArmazem();
+       }
+       for (Setor setor : setorList) {
+           if (setor.getCodigo().equals(codigoDoSetor)){
+               return setor;
+           }
+       }
+       return null;
+   }
 
 }

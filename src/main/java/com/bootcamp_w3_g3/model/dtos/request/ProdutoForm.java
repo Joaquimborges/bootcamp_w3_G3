@@ -38,6 +38,11 @@ public class ProdutoForm {
      * @return produto
      */
     public Produto convert(){
-        return new Produto(codigoDoProduto, nome, preco, dataDeValidadae, temperaturaIndicada);
+        return Produto.builder()
+                .codigoDoProduto(codigoDoProduto)
+                .nome(nome)
+                .preco(preco)
+                .dataDeValidadae(dataDeValidadae)
+                .temperaturaIndicada(temperaturaIndicada).build();
     }
 }

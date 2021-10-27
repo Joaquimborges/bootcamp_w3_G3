@@ -55,8 +55,11 @@ public class LoteIntegrationTest {
 
     private Lote alterarDadosDoPayloadValido(){
 
-        Produto produto = new Produto(123, "carne", new BigDecimal(60), LocalDate.now(),
-                16.0);
+        Produto produto = Produto.builder()
+                .codigoDoProduto(123)
+                .nome("carne")
+                .preco(new BigDecimal(60))
+                .dataDeValidadae(LocalDate.now()).build();
 
         return Lote.builder()
                 .id(1L)
@@ -68,8 +71,11 @@ public class LoteIntegrationTest {
     }
 
     private Lote criarPayloadValido(){
-        Produto produto = new Produto(123, "carne", new BigDecimal(60), LocalDate.now(),
-                16.0);
+        Produto produto = Produto.builder()
+                .codigoDoProduto(123)
+                .nome("carne")
+                .preco(new BigDecimal(60))
+                .dataDeValidadae(LocalDate.now()).build();
 
         return    Lote.builder()
                 .id(1L)

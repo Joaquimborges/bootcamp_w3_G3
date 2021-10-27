@@ -1,5 +1,6 @@
 package com.bootcamp_w3_g3.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.*;
 
 import javax.persistence.*;
@@ -36,5 +37,9 @@ public class Lote {
 
     @OneToOne
     private Produto produtos;
+
+    @JsonBackReference
+    @ManyToOne
+    private Setor setor;
 
 }

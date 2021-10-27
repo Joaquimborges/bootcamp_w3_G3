@@ -6,6 +6,7 @@ import com.bootcamp_w3_g3.repository.LoteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 
@@ -31,6 +32,7 @@ public class LoteService {
 
 
 
+    @Transactional
     public Lote salvar(Lote lote) {
         return loteRepository.save(lote);
     }

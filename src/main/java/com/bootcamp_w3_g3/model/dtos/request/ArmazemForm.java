@@ -6,7 +6,6 @@ import com.bootcamp_w3_g3.model.entity.Setor;
 import lombok.*;
 
 
-import javax.persistence.criteria.CriteriaBuilder;
 import java.util.List;
 
 @AllArgsConstructor
@@ -32,7 +31,7 @@ public class ArmazemForm {
                 .endereco(endereco)
                 .uf(uf)
                 .representante(representante)
-                .SetoresDoArmazem(setoresDoArmazem)
+                .setoresDoArmazem(setoresDoArmazem)
                 .build()
         ;
 

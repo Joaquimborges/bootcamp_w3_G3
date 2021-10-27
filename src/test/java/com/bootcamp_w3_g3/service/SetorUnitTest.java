@@ -26,7 +26,13 @@ public class SetorUnitTest {
     List<Setor> setorList = new ArrayList<>();
 
 
-    Armazem armazem1 = new Armazem("1234-meli", "cd cajamar",  "rua das cabras", "SP",  representante1,  setorList );
+    Armazem armazem1 = Armazem.builder()
+            .setoresDoArmazem(setorList)
+            .codArmazem("Ar-123")
+            .representante(representante1)
+            .nome("AR1")
+            .endereco("rua 10")
+            .uf("SP").build();
 
 
     Setor setor1 = Setor.builder()

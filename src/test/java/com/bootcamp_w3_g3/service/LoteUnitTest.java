@@ -30,8 +30,11 @@ public class LoteUnitTest {
    private final ArmazemService armazemService = Mockito.mock(ArmazemService.class);
    private final LoteRepository loteRepository = Mockito.mock(LoteRepository.class);
 
-    Produto produto = new Produto(123, "carne", new BigDecimal(60), LocalDate.now(),
-            16.0);
+    Produto produto = Produto.builder()
+            .codigoDoProduto(123)
+            .nome("carne")
+            .preco(new BigDecimal(60))
+            .dataDeValidadae(LocalDate.now()).build();
 
 
    Lote lote = Lote.builder()

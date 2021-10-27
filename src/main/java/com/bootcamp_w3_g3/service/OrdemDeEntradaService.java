@@ -1,10 +1,7 @@
 package com.bootcamp_w3_g3.service;
 
 
-import com.bootcamp_w3_g3.model.entity.Armazem;
-import com.bootcamp_w3_g3.model.entity.OrdemDeEntrada;
-import com.bootcamp_w3_g3.model.entity.Representante;
-import com.bootcamp_w3_g3.model.entity.Setor;
+import com.bootcamp_w3_g3.model.entity.*;
 import com.bootcamp_w3_g3.repository.OrdemDeEntradaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,11 +16,18 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class OrdemDeEntradaService {
+    @Autowired
     private OrdemDeEntradaRepository ordemDeEntradaRepository;
-
+    @Autowired
     private final RepresentanteService representanteService;
+    @Autowired
     private final ArmazemService armazemService;
+    @Autowired
     private final SetorService setorService;
+    @Autowired
+    private VendedorService vendedorService;
+    @Autowired
+    private LoteService loteService;
 
 
     @Autowired
@@ -125,9 +129,34 @@ public class OrdemDeEntradaService {
 
     public OrdemDeEntrada registra(OrdemDeEntrada ordemDeEntrada) {
         if (validarOrdem(ordemDeEntrada)) {
+            Representante r = representanteService.obter(ordemDeEntrada.getRepresentante().getCodigo());
+            Vendedor v = vendedorService.obter(ordemDeEntrada.getVendedor().getCodigo());
+            Setor s = setorService.obterSetor(ordemDeEntrada.getSetor().getCodigo());
+            Lote l = loteService.obter(ordemDeEntrada.getLote().getNumero());
+
+            ordemDeEntrada.setRepresentante(r);
+            ordemDeEntrada.setVendedor(v);
+            ordemDeEntrada.setSetor(s);
+            ordemDeEntrada.setLote(l);
             return ordemDeEntradaRepository.save(ordemDeEntrada);
         }
         return null;
+    }
+
+    private OrdemDeEntrada retornaOrdem(Integer numeroOrdem) {
+        return ordemDeEntradaRepository.findByNumeroDaOrdem(numeroOrdem);
+    }
+
+    public OrdemDeEntrada atualizaOrdem(OrdemDeEntrada ordemDeEntrada) {
+        if (ordemDeEntrada != null) {
+            OrdemDeEntrada ordemEncontro = retornaOrdem(ordemDeEntrada.getNumeroDaOrdem());
+            ordemDeEntrada.setLote(ordemDeEntrada.getLote());
+            loteService.atualizar(ordemDeEntrada.getLote());
+
+            ordemDeEntrada.setVendedor(ordemDeEntrada.getVendedor());
+
+        }
+         return null;
     }
 
 

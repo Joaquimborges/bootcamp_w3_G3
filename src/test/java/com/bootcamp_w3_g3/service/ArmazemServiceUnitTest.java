@@ -22,9 +22,21 @@ public class ArmazemServiceUnitTest {
 
     Representante representante = new Representante("Alex","Cruz","2345678910","5555555","Rua Joao neves 18");
 
-    Armazem armazem1 = new Armazem("1234-meli", "cd cajamar",  "rua das cabras", "SP",  representante,  setorList );
+    Armazem armazem1 = Armazem.builder()
+            .setoresDoArmazem(setorList)
+            .codArmazem("Ar-123")
+            .representante(representante)
+            .nome("AR1")
+            .endereco("rua 10")
+            .uf("SP").build();
 
-    Armazem armazem2= new Armazem("4321-meli", "cd barueri",  "rua das cabras", "SP",  representante,  setorList );
+    Armazem armazem2= Armazem.builder()
+            .setoresDoArmazem(setorList)
+            .codArmazem("Ar-123")
+            .representante(representante)
+            .nome("AR1")
+            .endereco("rua 10")
+            .uf("SP").build();
 
     Setor setor1 = Setor.builder()
             .codigo("123")

@@ -23,10 +23,17 @@ public class ProdutoServiceUnitTest {
     ProdutoService produtoService;
 
     ProdutoRepository produtoRepository = Mockito.mock(ProdutoRepository.class);
-    Produto produto = new Produto(12345, "Lasanha",
-                                    new BigDecimal("23.45"), LocalDate.now(), 12.05);
-    Produto produto2 = new Produto(67890, "Arroz",
-            new BigDecimal("13.45"), LocalDate.now(), 12.05);
+    Produto produto = Produto.builder()
+            .codigoDoProduto(123)
+            .nome("carne")
+            .preco(new BigDecimal(60))
+            .dataDeValidadae(LocalDate.now()).build();
+
+    Produto produto2 = Produto.builder()
+            .codigoDoProduto(123)
+            .nome("Arroz")
+            .preco(new BigDecimal(60))
+            .dataDeValidadae(LocalDate.now()).build();
 
 
     List<Produto> produtosList = new ArrayList<>();

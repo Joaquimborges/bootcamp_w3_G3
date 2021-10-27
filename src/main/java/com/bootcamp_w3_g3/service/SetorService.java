@@ -4,7 +4,10 @@ import com.bootcamp_w3_g3.model.entity.Setor;
 import com.bootcamp_w3_g3.repository.SetorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * @author hugo damm
@@ -13,6 +16,7 @@ import java.util.List;
 @Service
 public class SetorService {
 
+    @Autowired
     private final SetorRepository setorRepository;
 
     @Autowired
@@ -20,12 +24,19 @@ public class SetorService {
         this.setorRepository = setorRepository;
     }
 
+    @Transactional
     public Setor salvarSetor(Setor setor){
         return setorRepository.save(setor);
     }
 
+    public Setor get(Long id){
+        Optional<Setor> setorOp = this.setorRepository.findById(id);
+        return setorOp.get();
+    }
+
     public Setor obterSetor(String codigo){
-        return setorRepository.findByCodigo(codigo);
+        Setor setor = setorRepository.findByCodigo(codigo);
+        return setor;
     }
 
     public List<Setor> listarSetores(){

@@ -1,6 +1,7 @@
 package com.bootcamp_w3_g3.model.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -36,18 +37,11 @@ public class Armazem {
     @OneToOne
     private Representante representante;
 
-    @OneToMany
-    private List<Setor> SetoresDoArmazem;
+    @JsonManagedReference
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "armazem", fetch = FetchType.EAGER)
+    private List<Setor> setoresDoArmazem;
 
-    public Armazem(String codArmazem, String nome, String endereco, String uf, Representante representante, List<Setor> setoresDoArmazem) {
-        this.codArmazem = codArmazem;
-        this.nome = nome;
-        this.endereco = endereco;
-        this.uf = uf;
-        this.representante = representante;
-        this.SetoresDoArmazem = setoresDoArmazem;
 
-    }
 
 
     public Armazem(String codigoArmazem){

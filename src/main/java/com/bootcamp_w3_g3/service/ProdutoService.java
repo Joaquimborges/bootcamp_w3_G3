@@ -5,6 +5,7 @@ import com.bootcamp_w3_g3.repository.ProdutoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 /**
@@ -25,6 +26,7 @@ public class ProdutoService {
         this.produtoRepository = produtoRepository;
     }
 
+    @Transactional
     public Produto salvar(Produto produto) { return produtoRepository.save(produto); }
 
     public Produto obter(Integer codigo) { return produtoRepository.findByCodigoDoProduto(codigo); }

@@ -18,7 +18,7 @@ public interface ArmazemRepository extends JpaRepository<Armazem, Long> {
 
     Armazem deleteByCodArmazem(String cod);
 
-    Representante findByRepresentanteCodigo(Integer codigo);
+    Armazem findByRepresentanteCodigo(String codigo);
 
 
 }

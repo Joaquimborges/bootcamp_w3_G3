@@ -3,6 +3,7 @@ package com.bootcamp_w3_g3.controller;
 import com.bootcamp_w3_g3.model.dtos.request.SetorForm;
 import com.bootcamp_w3_g3.model.dtos.response.SetorDTO;
 import com.bootcamp_w3_g3.model.entity.Setor;
+import com.bootcamp_w3_g3.service.ArmazemService;
 import com.bootcamp_w3_g3.service.SetorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -21,9 +22,12 @@ public class SetorController {
     @Autowired
     private SetorService setorService;
 
+    @Autowired
+    private ArmazemService armazemService;
+
     @PostMapping("/salvar")
     public ResponseEntity<SetorDTO> salvar(@RequestBody SetorForm setorForm){
-        Setor setor = setorService.salvarSetor(setorForm.converte());
+        Setor setor = setorService.salvarSetor(setorForm.converte(armazemService));
         return new ResponseEntity<>(SetorDTO.converter(setor), HttpStatus.CREATED);
     }
 
@@ -48,7 +52,7 @@ public class SetorController {
 
     @PutMapping("/alterar")
     public ResponseEntity<SetorDTO> alterar(@RequestBody SetorForm setorForm){
-        Setor setor = setorService.atualizarSetor(setorForm.converte());
+        Setor setor = setorService.atualizarSetor(setorForm.converte(armazemService));
         return new ResponseEntity<>(SetorDTO.converter(setor), HttpStatus.OK);
     }
 

@@ -7,11 +7,7 @@ import com.bootcamp_w3_g3.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
+import org.springframework.web.bind.annotation.*;
 
 
 /**
@@ -39,6 +35,13 @@ public class OrdemEntradaController {
     public ResponseEntity<OrdemDeEntradaDTO> registrarOrdem(@RequestBody OrdemDeEntradaDTO dto) {
         OrdemDeEntrada ordemDeEntrada = dto.converte(vendedorService, armazemService);
         ordemService.registra(ordemDeEntrada);
+        return new ResponseEntity<>(HttpStatus.CREATED);
+    }
+
+    @PutMapping("/alterar")
+    public ResponseEntity<OrdemDeEntradaDTO> alteraOrdem(@RequestBody OrdemDeEntradaDTO ordemDeEntradaDTO){
+        OrdemDeEntrada ordemDeEntrada = ordemDeEntradaDTO.converte(vendedorService,armazemService);
+        ordemService.atualizaOrdem(ordemDeEntrada);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 

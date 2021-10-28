@@ -149,12 +149,18 @@ public class OrdemDeEntradaService {
 
     public OrdemDeEntrada atualizaOrdem(OrdemDeEntrada ordemDeEntrada) {
         if (ordemDeEntrada != null) {
-            OrdemDeEntrada ordemEncontro = retornaOrdem(ordemDeEntrada.getNumeroDaOrdem());
+            OrdemDeEntrada ordemDeEntradaAlterada = retornaOrdem(ordemDeEntrada.getNumeroDaOrdem());
             ordemDeEntrada.setLote(ordemDeEntrada.getLote());
             loteService.atualizar(ordemDeEntrada.getLote());
+            ordemDeEntradaAlterada.setRepresentante(ordemDeEntrada.getRepresentante());
+            representanteService.atualizar(ordemDeEntrada.getRepresentante());
+            ordemDeEntradaAlterada.setSetor(ordemDeEntrada.getSetor());
+            setorService.atualizarSetor(ordemDeEntrada.getSetor());
+            ordemDeEntradaAlterada.setVendedor(ordemDeEntrada.getVendedor());
+            vendedorService.atualizar(ordemDeEntrada.getVendedor());
+            ordemDeEntradaAlterada.setDataDaOrdem(ordemDeEntrada.getDataDaOrdem());
 
-            ordemDeEntrada.setVendedor(ordemDeEntrada.getVendedor());
-
+            return ordemDeEntradaRepository.save(ordemDeEntradaAlterada);
         }
          return null;
     }

@@ -6,14 +6,11 @@ package com.bootcamp_w3_g3.service;
  */
 import com.bootcamp_w3_g3.model.entity.Armazem;
 import com.bootcamp_w3_g3.model.entity.Representante;
-import com.bootcamp_w3_g3.model.entity.Setor;
 import com.bootcamp_w3_g3.repository.ArmazemRepository;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import javax.transaction.Transactional;
-import java.util.ArrayList;
 import java.util.List;
 
 @NoArgsConstructor
@@ -47,7 +44,6 @@ public class ArmazemService {
     public Armazem atualizarArmazem(Armazem armazem) {
         Armazem editedArmazem = armazemRepository.findByCodArmazem(armazem.getCodArmazem());
 
-        editedArmazem.setSetoresDoArmazem(armazem.getSetoresDoArmazem());
         editedArmazem.setRepresentante(armazem.getRepresentante());
         editedArmazem.setEndereco(armazem.getEndereco());
         editedArmazem.setUf(armazem.getUf());
@@ -57,14 +53,9 @@ public class ArmazemService {
 
     }
 
-    public List<Setor> listarSetores() {
-        return setorService.listarSetores();
-    }
-
     public List<Armazem> listarArmazens() {
        return armazemRepository.findAll();
     }
-
 
     public Representante retornaRepresentanteDoArmazem(String codigoRepresentante) {
         for (Armazem armazem : listarArmazens()){
@@ -75,17 +66,5 @@ public class ArmazemService {
         return null;
     }
 
-   public Setor retornaSetorDoArmazem(String codigoDoSetor) {
-       List<Setor> setorList = new ArrayList<>();
-       for (Armazem armazem : listarArmazens()) {
-           setorList = armazem.getSetoresDoArmazem();
-       }
-       for (Setor setor : setorList) {
-           if (setor.getCodigo().equals(codigoDoSetor)){
-               return setor;
-           }
-       }
-       return null;
-   }
 
 }

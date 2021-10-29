@@ -30,7 +30,6 @@ public class Armazem {
     private long id;
 
     private String codArmazem;
-
     private String nome;
     private String endereco;
     private String uf;
@@ -38,19 +37,8 @@ public class Armazem {
     @OneToOne
     private Representante representante;
 
-    @JsonManagedReference
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "armazem", fetch = FetchType.EAGER)
-    private List<Setor> setoresDoArmazem = new ArrayList<>();
-
-
-
-
     public Armazem(String codigoArmazem){
         this.codArmazem = codigoArmazem;
     }
 
-    public void adicionaSetor(Setor setor){
-        setor.setArmazem(this);
-        this.setoresDoArmazem.add(setor);
-    }
 }

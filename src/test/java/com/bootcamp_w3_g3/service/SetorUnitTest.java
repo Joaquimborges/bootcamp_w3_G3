@@ -28,7 +28,6 @@ public class SetorUnitTest {
 
 
     Armazem armazem1 = Armazem.builder()
-            .setoresDoArmazem(setorList)
             .codArmazem("Ar-123")
             .representante(representante1)
             .nome("AR1")

@@ -92,7 +92,7 @@ public class OrdemDeEntradaService {
      * metodo para validar a existencia do setor no armazem
      */
     private boolean setorExiste(String codigo) {
-        for (Setor setor : armazemService.listarSetores()) {
+        for (Setor setor : setorService.listarSetores()) {
             if (setor.getCodigo().equals(codigo)){
                 return true;
             }
@@ -107,7 +107,7 @@ public class OrdemDeEntradaService {
         if (setorService.obterSetor(codSetor) == null ) {
             return false;
         }
-        return   (armazemService.listarSetores().stream()
+        return   (setorService.listarSetores().stream()
                 .filter(s-> s.getCodigo().equals(codSetor))
                         .findFirst()).get().getEspacoDisponivel() >= quantidadeAtual;
 

@@ -2,6 +2,8 @@ package com.bootcamp_w3_g3.service;
 
 
 import com.bootcamp_w3_g3.model.entity.Lote;
+import com.bootcamp_w3_g3.model.entity.Produto;
+import com.bootcamp_w3_g3.model.entity.Setor;
 import com.bootcamp_w3_g3.repository.LoteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,22 +20,22 @@ import java.util.List;
 @Service
 public class LoteService {
 
-
-    private final LoteRepository loteRepository;
-
-    private final ArmazemService armazemService;
-
     @Autowired
-    public LoteService(LoteRepository loteRepository, ArmazemService armazemService) {
-        this.loteRepository = loteRepository;
-        this.armazemService = armazemService;
-    }
-
-
+    private LoteRepository loteRepository;
+    @Autowired
+    private ArmazemService armazemService;
+    @Autowired
+    private ProdutoService produtoService;
+    @Autowired
+    private SetorService setorService;
 
 
     @Transactional
     public Lote salvar(Lote lote) {
+        Produto produto = this.produtoService.obter(lote.getProduto().getCodigoDoProduto());
+        Setor setor = this.setorService.obterSetor(lote.getSetor().getCodigo());
+        lote.setSetor(setor);
+        lote.setProduto(produto);
         return loteRepository.save(lote);
     }
 

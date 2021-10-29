@@ -20,7 +20,9 @@ public class ArmazemServiceUnitTest {
 
     List<Setor> setorList = new ArrayList<>();
 
-    Representante representante = new Representante("Alex","Cruz","2345678910","5555555","Rua Joao neves 18");
+    Representante representante = Representante.builder()
+            .nome("Alex").sobrenome("Cruz").cpf("2345678910").telefone("5555555").endereco("Rua Joao neves 18").build();
+
 
     Armazem armazem1 = Armazem.builder()
             .setoresDoArmazem(setorList)

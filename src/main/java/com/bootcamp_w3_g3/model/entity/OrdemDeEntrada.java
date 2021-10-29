@@ -4,7 +4,6 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.List;
 
 /**
  *
@@ -28,12 +27,9 @@ public class OrdemDeEntrada {
     private Setor setor;
     @ManyToOne
     private Representante representante;
-    @ManyToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private Lote lote;
     @OneToOne
     private Vendedor vendedor;
-    
-    
-
 
 }

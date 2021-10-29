@@ -42,7 +42,7 @@ public class LoteDTO {
     public static LoteDTO converter(Lote lote) {
         return LoteDTO.builder()
                 .numero(lote.getNumero())
-                .produto(lote.getProdutos())
+                .produto(lote.getProduto())
                 .temperaturaAtual(lote.getTemperaturaAtual())
                 .temperaturaMinima(lote.getTemperaturaMinima())
                 .quantidadeAtual(lote.getQuantidadeAtual())
@@ -58,7 +58,7 @@ public class LoteDTO {
         for (Lote lote : loteList) {
             loteDTOList.add(LoteDTO.builder()
                     .numero(lote.getNumero())
-                    .produto(lote.getProdutos())
+                    .produto(lote.getProduto())
                     .temperaturaAtual(lote.getTemperaturaAtual())
                     .temperaturaMinima(lote.getTemperaturaMinima())
                     .quantidadeAtual(lote.getQuantidadeAtual())

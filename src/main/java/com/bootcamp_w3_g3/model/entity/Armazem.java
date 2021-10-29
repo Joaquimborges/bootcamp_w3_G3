@@ -14,6 +14,7 @@ import lombok.*;
 
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -39,12 +40,17 @@ public class Armazem {
 
     @JsonManagedReference
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "armazem", fetch = FetchType.EAGER)
-    private List<Setor> setoresDoArmazem;
+    private List<Setor> setoresDoArmazem = new ArrayList<>();
 
 
 
 
     public Armazem(String codigoArmazem){
         this.codArmazem = codigoArmazem;
+    }
+
+    public void adicionaSetor(Setor setor){
+        setor.setArmazem(this);
+        this.setoresDoArmazem.add(setor);
     }
 }

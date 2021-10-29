@@ -21,7 +21,8 @@ public class SetorUnitTest {
     private SetorService setorService;
     private final SetorRepository setorRepository = Mockito.mock(SetorRepository.class);
 
-    Representante representante1 = new Representante("Ernani", "Santos", "123.345.678-92", "11 9 7867-3456", "Rua B");
+    Representante representante1 = Representante.builder()
+            .nome("Ernani").sobrenome("Santos").cpf("123.345.678-92").telefone("11 9 7867-3456").endereco("Rua B").build();
 
     List<Setor> setorList = new ArrayList<>();
 

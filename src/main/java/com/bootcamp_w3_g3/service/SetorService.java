@@ -43,6 +43,11 @@ public class SetorService {
         return setorRepository.findAll();
     }
 
+
+    public List<Setor> lista(Long armazemId){
+        return this.setorRepository.findByArmazem_Id(armazemId);
+    }
+
     public Setor atualizarSetor(Setor setor){
         Setor editedSetor = setorRepository.findByCodigo(setor.getCodigo());
 

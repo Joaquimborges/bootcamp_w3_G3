@@ -23,8 +23,12 @@ public class RepresentanteServiceUnitTest {
 
     RepresentanteRepository representanteRepository = Mockito.mock(RepresentanteRepository.class);
 
-    Representante representante     = new Representante("Alex","Cruz","2345678910","5555555","Rua Joao neves 18");
-    Representante representante2    = new Representante("Alex","Cruz","2345678910","5555555","Rua Joao neves 18");
+    Representante representante  = Representante.builder()
+            .nome("Alex").sobrenome("Cruz").cpf("2345678910").telefone("5555555").endereco("Rua Joao neves 18").build();
+
+    Representante representante2  = Representante.builder()
+            .nome("Alex").sobrenome("Cruz").cpf("2345678910").telefone("5555555").endereco("Rua Joao neves 18").build();
+
     List<Representante> representantesList = new ArrayList<>();
 
     @Test

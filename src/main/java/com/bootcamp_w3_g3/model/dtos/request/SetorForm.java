@@ -3,6 +3,7 @@ package com.bootcamp_w3_g3.model.dtos.request;
 import com.bootcamp_w3_g3.model.entity.*;
 import com.bootcamp_w3_g3.service.ArmazemService;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -15,12 +16,17 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
+@Builder
 public class SetorForm {
 
     private String codigo;
     private String nome;
     private String tipoProduto;
-    private Armazem armazem;
+    private ArmazemForm armazem;
+    private Integer espacoDisponivel = 100;
+    private List<LoteForm> lote;
+
+
     //private List<Lote> lote;
 
     public Setor converte(ArmazemService armazemService){
@@ -31,6 +37,8 @@ public class SetorForm {
                 .tipoProduto(tipoProduto)
                 .armazem(armazem).build();
     }
+
+
 
 }
 

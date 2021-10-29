@@ -12,8 +12,7 @@ import java.time.LocalTime;
  * @autor Alex Cruz
  */
 
-@Getter
-@Setter
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
@@ -35,11 +34,10 @@ public class Lote {
     private LocalDate dataDeFabricacao;
     private LocalDate dataDeValidade;
 
-    @OneToOne
-    private Produto produtos;
+    @ManyToOne
+    private Produto produto;
 
     @JsonBackReference
     @ManyToOne
     private Setor setor;
-
 }

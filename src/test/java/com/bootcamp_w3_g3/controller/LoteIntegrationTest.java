@@ -65,7 +65,7 @@ public class LoteIntegrationTest {
                 .id(1L)
                 .numero(9)
                 .dataDeValidade(LocalDate.now())
-                .produtos(produto)
+                .produto(produto)
                 .quantidadeAtual(3)
                 .build();
     }
@@ -81,7 +81,7 @@ public class LoteIntegrationTest {
                 .id(1L)
                 .numero(9)
                 .dataDeValidade(LocalDate.now())
-                .produtos(produto)
+                .produto(produto)
                 .quantidadeAtual(1)
                 .build();
     }

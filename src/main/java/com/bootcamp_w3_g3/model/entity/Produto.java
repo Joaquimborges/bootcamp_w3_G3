@@ -29,8 +29,6 @@ public class Produto {
     private BigDecimal preco;
     private LocalDate dataDeValidadae;
     private Double temperaturaIndicada;
-    @ManyToOne
-    private Lote lote;
 
 
 

@@ -6,6 +6,8 @@ import com.bootcamp_w3_g3.repository.OrdemDeEntradaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
+
 
 /**
  * @author Matheus Willock
@@ -77,7 +79,7 @@ public class OrdemDeEntradaService {
 
     private boolean setorCorrespondeAoTipoDeProduto(String tipoDeProduto) {
         for (Setor setor : setorService.listarSetores()) {
-            if (setor.getTipoProduto().equals(tipoDeProduto)) {
+            if (setor.getTipoProduto()!=null && setor.getTipoProduto().equals(tipoDeProduto)) {
                 return true;
             }
         }
@@ -127,6 +129,7 @@ public class OrdemDeEntradaService {
     }
 
 
+    @Transactional
     public OrdemDeEntrada registra(OrdemDeEntrada ordemDeEntrada) {
         if (validarOrdem(ordemDeEntrada)) {
             Representante r = representanteService.obter(ordemDeEntrada.getRepresentante().getCodigo());
@@ -150,7 +153,7 @@ public class OrdemDeEntradaService {
     public OrdemDeEntrada atualizaOrdem(OrdemDeEntrada ordemDeEntrada) {
         if (ordemDeEntrada != null) {
             OrdemDeEntrada ordemDeEntradaAlterada = retornaOrdem(ordemDeEntrada.getNumeroDaOrdem());
-            ordemDeEntrada.setLote(ordemDeEntrada.getLote());
+            ordemDeEntradaAlterada.setLote(ordemDeEntrada.getLote());
             loteService.atualizar(ordemDeEntrada.getLote());
             ordemDeEntradaAlterada.setRepresentante(ordemDeEntrada.getRepresentante());
             representanteService.atualizar(ordemDeEntrada.getRepresentante());

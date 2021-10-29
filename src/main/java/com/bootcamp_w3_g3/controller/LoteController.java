@@ -5,6 +5,8 @@ import com.bootcamp_w3_g3.model.dtos.request.LoteForm;
 import com.bootcamp_w3_g3.model.dtos.response.LoteDTO;
 import com.bootcamp_w3_g3.model.entity.Lote;
 import com.bootcamp_w3_g3.service.LoteService;
+import com.bootcamp_w3_g3.service.ProdutoService;
+import com.bootcamp_w3_g3.service.SetorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,11 +20,17 @@ import java.util.List;
 public class LoteController {
 
     @Autowired
+    private SetorService setorService;
+
+    @Autowired
     private LoteService loteService;
+
+    @Autowired
+    private ProdutoService produtoService;
 
     @PostMapping("/salvar")
     public ResponseEntity<LoteDTO> salvar(@RequestBody LoteForm loteForm) {
-        Lote lote = loteService.salvar(loteForm.converte());
+        Lote lote = loteService.salvar(loteForm.converte(produtoService, setorService));
         return new ResponseEntity<>(LoteDTO.converter(lote), HttpStatus.CREATED);
     }
 
@@ -40,7 +48,7 @@ public class LoteController {
 
     @PutMapping("/alterar")
     public ResponseEntity<LoteDTO> alterar(@RequestBody LoteForm loteForm) {
-        Lote lote = loteService.atualizar(loteForm.converte());
+        Lote lote = loteService.atualizar(loteForm.converte(produtoService, setorService));
         return new ResponseEntity<>(LoteDTO.converter(lote), HttpStatus.OK);
     }
 

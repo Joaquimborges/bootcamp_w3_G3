@@ -10,8 +10,9 @@ import java.util.List;
 @Repository
     public interface ItensRepository extends JpaRepository<Itens, Long> {
 
-        Itens findItensById(Long id);
+        //Itens findItensById(Long id);
 
+        Itens getItensById(Long id);
 
     }
 

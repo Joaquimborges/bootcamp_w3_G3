@@ -6,33 +6,53 @@ import com.bootcamp_w3_g3.model.entity.Lote;
 import com.bootcamp_w3_g3.model.entity.Produto;
 import com.bootcamp_w3_g3.model.entity.Setor;
 import com.bootcamp_w3_g3.repository.LoteRepository;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 /**
  * @author Joaquim Borges
  * @autor  Alex Cruz
  */
+@AllArgsConstructor
 
 @Service
 public class LoteService {
 
-    @Autowired
+
+
     private LoteRepository loteRepository;
-    @Autowired
+
+
+
     private ArmazemService armazemService;
-    @Autowired
+
+
+
     private ProdutoService produtoService;
-    @Autowired
+
+
     private SetorService setorService;
+
+    @Autowired
+    public LoteService(LoteRepository loteRepository, ProdutoService produtoService, SetorService setorService)
+    {
+        this.loteRepository = loteRepository;
+        this.produtoService = produtoService;
+        this. setorService = setorService;
+    }
+
 
 
     @Transactional
-    public Lote salvar(Lote lote) {
+    public Lote salvar( Lote lote) {
         Produto produto = this.produtoService.obter(lote.getProduto().getCodigoDoProduto());
         Setor setor = this.setorService.obterSetor(lote.getSetor().getCodigo());
         lote.setSetor(setor);
@@ -49,7 +69,7 @@ public class LoteService {
     }
 
     public List<Lote> listar() {
-        return loteRepository.findAll();
+        return loteRepository.findAll().stream().collect(Collectors.toList());
     }
 
     public Lote atualizar(Lote lote) {

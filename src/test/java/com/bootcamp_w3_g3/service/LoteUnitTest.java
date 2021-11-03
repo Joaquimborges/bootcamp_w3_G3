@@ -25,11 +25,18 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class LoteUnitTest {
 
-    @Autowired
-   private LoteService loteService;
 
-   private final ArmazemService armazemService = Mockito.mock(ArmazemService.class);
-   private final LoteRepository loteRepository = Mockito.mock(LoteRepository.class);
+    private LoteRepository loteRepository = Mockito.mock(LoteRepository.class);
+    @Autowired
+    private ProdutoService produtoService;
+    @Autowired
+    private SetorService setorService;
+
+    @Autowired
+   private LoteService loteService = new LoteService(loteRepository,produtoService, setorService);
+
+   //private ArmazemService armazemService = Mockito.mock(ArmazemService.class);
+
 
     Produto produto = Produto.builder()
             .codigoDoProduto(123)
@@ -57,20 +64,19 @@ public class LoteUnitTest {
      */
    @Test
    void should_save_lote_whenPayloadIsValid(){
-
-        Mockito.when(loteRepository.save(Mockito.any(Lote.class))).thenReturn(lote);
+        loteService = Mockito.mock(LoteService.class);
+        Mockito.when(loteService.salvar(Mockito.any(Lote.class))).thenReturn(lote);
         Lote loteSalvo = loteService.salvar(lote);
-
         assertNotNull(loteSalvo);
+        assertEquals(lote, loteSalvo);
     }
 
    @Test
    void should_get_a_lote(){
-      Mockito.when(loteRepository.findByNumero(Mockito.any(Integer.class))).thenReturn(lote);
 
-      Lote getLote = loteService.obter(lote.getNumero());
+       Mockito.when(loteService.obter(Mockito.any(Integer.class))).thenReturn(lote);
 
-      assertEquals(10, getLote.getNumero());
+      assertEquals(10, loteService.obter(lote.getNumero()).getNumero());
    }
 
 
@@ -78,13 +84,17 @@ public class LoteUnitTest {
    void should_getAll_lotes(){
       List<Lote> lotes = new ArrayList<>();
 
-      Mockito.when(loteRepository.findAll()).thenReturn(lotes);
+      Mockito.when(loteService.listar()).thenReturn(lotes);
       lotes.add(lote);
       lotes.add(lote1);
 
-      List<Lote> loteList = loteService.listar();
+
+      List<Lote> loteList = new ArrayList<>();
+      loteList.addAll(loteService.listar());
+
 
       assertEquals(loteList.size(), lotes.size());
+      assertNotEquals(lotes.size(), 0);
    }
 
 

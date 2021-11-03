@@ -31,7 +31,7 @@ public class ItensService {
     }
 
     public Itens atualizar(Itens itens) {
-        Itens itensEdited = itensRepository.findItensById(itens.getId());
+        Itens itensEdited = itensRepository.getItensById(itens.getId());
         itensEdited.setProduto(itens.getProduto());
         itensEdited.setQuantidade(itens.getQuantidade());
 

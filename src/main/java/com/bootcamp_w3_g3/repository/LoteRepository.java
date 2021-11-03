@@ -13,6 +13,11 @@ public interface LoteRepository extends JpaRepository<Lote, Long> {
 
     Lote findByNumero(Integer numero);
 
+    Lote getByNumero(Integer numero);
+
     Lote deleteByNumero(Integer numero);
 
+    Lote getLoteByNumero(Integer numeroDoLote);
+
+    Lote findLoteByNumero(Integer numeroDoLote);
 }

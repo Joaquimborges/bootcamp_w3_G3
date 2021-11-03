@@ -60,12 +60,14 @@ public class LoteService {
         return loteRepository.save(lote);
     }
 
-    public Lote obter(Integer numeroDoLote) {
-        Lote lote = loteRepository.findByNumero(numeroDoLote);
+    public Lote obter(Integer numero) {
+        Lote lote = loteRepository.getLoteByNumero(numero);
         if (lote != null){
             return lote;
         }
-        throw new EntityNotFoundException("lote não encontrado");
+        {
+            throw new EntityNotFoundException("lote não encontrado");
+        }
     }
 
     public List<Lote> listar() {

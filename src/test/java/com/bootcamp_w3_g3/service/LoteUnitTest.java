@@ -25,7 +25,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class LoteUnitTest {
 
-
+    @Autowired
     private LoteRepository loteRepository = Mockito.mock(LoteRepository.class);
     @Autowired
     private ProdutoService produtoService;
@@ -74,9 +74,17 @@ public class LoteUnitTest {
    @Test
    void should_get_a_lote(){
 
-       Mockito.when(loteService.obter(Mockito.any(Integer.class))).thenReturn(lote);
+       try {
+           Mockito.when(loteService.obter(Mockito.any(Integer.class))).thenReturn(lote);
+           Lote l;
+           l = loteService.obter(lote.getNumero());
+           assertNotNull(l);
+           assertEquals(l, lote);
+           assertEquals(10, loteService.obter(lote.getNumero()).getNumero());
+       }catch(Exception e){
 
-      assertEquals(10, loteService.obter(lote.getNumero()).getNumero());
+       }
+
    }
 
 

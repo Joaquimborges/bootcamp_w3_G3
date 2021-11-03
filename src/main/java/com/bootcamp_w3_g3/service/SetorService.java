@@ -17,7 +17,7 @@ import java.util.Optional;
 @Service
 public class SetorService {
 
-    @Autowired
+
     private final SetorRepository setorRepository;
 
     @Autowired
@@ -30,13 +30,8 @@ public class SetorService {
         return setorRepository.save(setor);
     }
 
-    public Setor get(Long id){
-        Optional<Setor> setorOp = this.setorRepository.findById(id);
-        return setorOp.get();
-    }
-
     public Setor obterSetor(String codigo){
-       Setor setor = setorRepository.findByCodigo(codigo);
+       Setor setor = setorRepository.getSetorByCodigo(codigo);
        if (setor != null){
            return setor;
        }
@@ -49,12 +44,12 @@ public class SetorService {
 
 
     public List<Setor> lista(Long armazemId){
-        return this.setorRepository.findByArmazem_Id(armazemId);
+        return this.setorRepository.findSetorByArmazem_Id(armazemId);
     }
 
     public Setor atualizarSetor(Setor setor){
-        Setor editedSetor = setorRepository.findByCodigo(setor.getCodigo());
-
+        Setor editedSetor = setorRepository.getSetorByCodigo(setor.getCodigo());
+        if (editedSetor == null) return null;
         editedSetor.setNome(setor.getNome());
         editedSetor.setTipoProduto(setor.getTipoProduto());
         editedSetor.setArmazem(setor.getArmazem());

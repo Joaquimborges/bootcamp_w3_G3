@@ -14,13 +14,18 @@ import javax.persistence.criteria.CriteriaBuilder;
 @Repository
 public interface ProdutoRepository extends JpaRepository<Produto, Long>{
 
-    Produto findByCodigoDoProduto(Integer codigo);
+    Produto findProdutoByCodigoDoProduto(Integer codigo);
 
-    Produto deleteProdutosByCodigoDoProduto(Integer codigo);
+    Produto deleteProdutoByCodigo(Integer codigo);
 
     Produto findAllByTipoProduto(String tipoDeProduto);
 
 
+    Object deleteProdutoByCodigoDoProduto(Integer codigo);
+
+    Produto getProdutoByCodigoDoProduto(Integer codigo);
+
+    Produto getProdutoByCodigo(Integer codigo);
 }
 
 

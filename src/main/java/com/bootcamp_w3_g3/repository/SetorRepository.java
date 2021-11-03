@@ -7,10 +7,10 @@ import java.util.List;
 
 public interface SetorRepository extends JpaRepository<Setor, Long> {
 
-    Setor findByCodigo(String codigo);
 
-    Setor deleteByCodigo(String codigo);
+    List<Setor> findSetorByArmazem_Id(Long id);
 
-    List<Setor> findByArmazem_Id(Long id);
+    Setor getSetorByCodigo(String codigo);
 
+    Object deleteSetorByCodigo(String Codigo);
 }

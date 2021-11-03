@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -21,6 +20,7 @@ import java.util.List;
 @Service
 public class ProdutoService {
 
+
     private ProdutoRepository produtoRepository;
 
     @Autowired
@@ -32,13 +32,19 @@ public class ProdutoService {
     public Produto salvar(Produto produto) { return produtoRepository.save(produto); }
 
     public Produto obter(Integer codigo) {
-        Produto produto = produtoRepository.findByCodigoDoProduto(codigo);
-        if (produto != null){
+        try {
+            Produto produto = produtoRepository.getProdutoByCodigoDoProduto(codigo);
+            if (produto != null){
             return produto;
-        }
-        throw  new EntityNotFoundException("produto não encontrado");
-    }
+            }
+            else throw  new EntityNotFoundException("produto não encontrado");
 
+        }
+        catch (EntityNotFoundException enfe)
+        {
+            return null;
+        }
+    }
 
     public Produto obterPorCategoria(String tipoDeProduto){
         return produtoRepository.findAllByTipoProduto(tipoDeProduto);
@@ -49,7 +55,7 @@ public class ProdutoService {
     }
 
     public Produto atualizar(Produto produto) {
-        Produto produtoEdited = produtoRepository.findByCodigoDoProduto(produto.getCodigoDoProduto());
+        Produto produtoEdited = produtoRepository.findProdutoByCodigoDoProduto(produto.getCodigoDoProduto());
         produtoEdited.setPreco(produto.getPreco());
         produtoEdited.setNome(produto.getNome());
         produtoEdited.setTemperaturaIndicada(produto.getTemperaturaIndicada());

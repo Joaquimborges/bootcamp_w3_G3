@@ -18,8 +18,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class SetorUnitTest {
 
-    private SetorService setorService;
     private final SetorRepository setorRepository = Mockito.mock(SetorRepository.class);
+    private SetorService setorService = new SetorService(setorRepository);
     private static final Long SETOR_ID = Long.valueOf(1);
 
     Representante representante1 = Representante.builder()
@@ -66,13 +66,13 @@ public class SetorUnitTest {
     @Test
     void obterSetorTest(){
         setor1.setCodigo("123");
-        Mockito.when(setorRepository.findByCodigo(Mockito.any(String.class))).thenReturn(setor1);
+        Mockito.when(setorRepository.getSetorByCodigo(Mockito.any(String.class))).thenReturn(setor1);
 
         setorService = new SetorService(setorRepository);
         Setor obtido = setorService.obterSetor(setor1.getCodigo());
 
         Mockito.verify(setorRepository,
-                Mockito.times(1)).findByCodigo(setor1.getCodigo());
+                Mockito.times(1)).getSetorByCodigo(setor1.getCodigo());
 
         assertEquals(obtido.getCodigo(), setor1.getCodigo());
     }
@@ -89,6 +89,7 @@ public class SetorUnitTest {
 
         Mockito.verify(setorRepository, Mockito.times(1)).findAll();
 
+        assertNotNull(lista);
         assertEquals(lista.size(), setorList.size());
 
     }
@@ -99,13 +100,13 @@ public class SetorUnitTest {
         setor1.setNome("Setor1234");
         setor1.setTipoProduto("Frescos01");
 
-        Mockito.when(setorRepository.findByCodigo(Mockito.any(String.class))).thenReturn(setor1);
+        Mockito.when(setorRepository.getSetorByCodigo(Mockito.any(String.class))).thenReturn(setor1);
         Mockito.when(setorRepository.save(Mockito.any(Setor.class))).thenReturn(setor1);
 
-        setorService = new SetorService(setorRepository);
+
         Setor uptaded = setorService.atualizarSetor(setor1);
 
-        Mockito.verify(setorRepository, Mockito.times(1)).findByCodigo(setor1.getCodigo());
+        Mockito.verify(setorRepository, Mockito.times(1)).getSetorByCodigo(setor1.getCodigo());
         Mockito.verify(setorRepository, Mockito.times(1)).save(setor1);
 
         assertNotNull(uptaded);
@@ -116,13 +117,14 @@ public class SetorUnitTest {
     @Test
     void removerSetorTest() {
         setor1.setCodigo("25");
-        Mockito.when(setorRepository.deleteByCodigo(Mockito.any(String.class))).thenReturn(setor1);
+        Mockito.when(setorRepository.deleteSetorByCodigo(Mockito.any(String.class))).thenReturn(setor1);
 
         setorService = new SetorService(setorRepository);
         Setor deletado = setorService.removerSetor(setor1.getId());
 
         Mockito.verify(setorRepository, Mockito.times(1)).deleteById(setor1.getId());
 
+        assertNull(deletado);
         assertNotEquals(deletado,setor1);
     }
 

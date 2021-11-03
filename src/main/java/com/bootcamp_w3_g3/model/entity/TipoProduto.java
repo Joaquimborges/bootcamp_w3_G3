@@ -8,21 +8,9 @@ package com.bootcamp_w3_g3.model.entity;
  */
 public enum TipoProduto {
 
-    CONGELADOS("CONGELADOS"),
-    FRESCOS("FRESCOS"),
-    REFRIGERADOS("REFRIGERADOS");
+    CONGELADOS,
+    FRESCOS,
+    REFRIGERADOS
 
 
-    private String tipoDeProduto;
-
-    TipoProduto(String tipoDeProduto)
-    {
-        this.tipoDeProduto = tipoDeProduto;
-    }
-
-    public String getTipoDeProduto() {
-        {
-            return tipoDeProduto;
-        }
-    }
 }

@@ -193,7 +193,6 @@ public class OrdemEntradaIntegrationTest {
 
         String requestPayload = objectMapper.writeValueAsString(ordemDeEntradaForm);
 
-        System.out.println(requestPayload);
         this.mockMvc.perform(post("http://localhost:8080/api/ordem-entrada/registrar")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(requestPayload))

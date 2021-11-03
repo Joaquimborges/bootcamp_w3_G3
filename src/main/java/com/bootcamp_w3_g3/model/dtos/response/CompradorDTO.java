@@ -18,9 +18,11 @@ public class CompradorDTO {
     private String usuario;
 
 
-    public CompradorDTO converter(Comprador comprador) {
+    public static CompradorDTO converter(Comprador comprador) {
         return CompradorDTO.builder()
                 .usuario(comprador.getUsuario())
                 .build();
     }
+
+
 }

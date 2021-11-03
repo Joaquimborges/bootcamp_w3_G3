@@ -22,7 +22,6 @@ public class ArmazemController {
     @Autowired
     private RepresentanteService representanteService;
 
-//    OK
     @PostMapping("/criar")
     public ResponseEntity<ArmazemDTO> criarArmazem(@RequestBody ArmazemForm armazemForm) {
         Armazem armazem = armazemService.criarArmazem(armazemForm.converte(representanteService));
@@ -32,7 +31,6 @@ public class ArmazemController {
         );
     }
 
-    //    OK
     @GetMapping("/listar")
     public ResponseEntity<List<ArmazemDTO>> listar() {
         List<Armazem> armazemList = armazemService.listarArmazens();
@@ -43,5 +41,21 @@ public class ArmazemController {
         );
 
     }
+
+    @GetMapping("/obter/{codigo}")
+    public ResponseEntity<ArmazemDTO> obterArmazem(@PathVariable String codigo) {
+        Armazem armazem = armazemService.obterArmazem(codigo);
+
+        return new ResponseEntity<>(ArmazemDTO.converter(armazem), HttpStatus.OK);
+    }
+
+    @PutMapping("/atualizar")
+    public ResponseEntity<ArmazemDTO> atualizarArmazem(@RequestBody ArmazemForm armazemForm) {
+        Armazem armazem = armazemService.atualizarArmazem(armazemForm.converte(representanteService));
+
+
+        return new ResponseEntity<>(ArmazemDTO.converter(armazem), HttpStatus.OK);
+    }
+
 
 }

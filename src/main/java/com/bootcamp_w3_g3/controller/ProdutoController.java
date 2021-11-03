@@ -2,6 +2,7 @@ package com.bootcamp_w3_g3.controller;
 import com.bootcamp_w3_g3.model.dtos.request.ProdutoForm;
 import com.bootcamp_w3_g3.model.dtos.response.ProdutoDTO;
 import com.bootcamp_w3_g3.model.entity.Produto;
+import com.bootcamp_w3_g3.model.entity.TipoProduto;
 import com.bootcamp_w3_g3.repository.ProdutoRepository;
 import com.bootcamp_w3_g3.service.ProdutoService;
 import lombok.Getter;
@@ -14,7 +15,7 @@ import java.util.List;
 import java.util.NoSuchElementException;
 
 /**
- * @author: Marcelo de Oliveira Santos
+ * @author Marcelo de Oliveira Santos
  *
  * @implNote Nao serao criados somente para retorno.
  */
@@ -87,9 +88,9 @@ public class ProdutoController {
     }
 
     @GetMapping("/listar/{categoria}")
-    public ResponseEntity<Produto> listarPorCategoria(@PathVariable String categoria){
+    public ResponseEntity<List<Produto>> listarPorCategoria(@PathVariable TipoProduto categoria){
         try {
-            return new ResponseEntity<>(produtoService.obterPorCategoria(categoria), HttpStatus.OK);
+            return new ResponseEntity<>(produtoService.listarPorCategoria(categoria), HttpStatus.OK);
         }catch (Exception e){
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }

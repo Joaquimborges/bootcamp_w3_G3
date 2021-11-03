@@ -104,7 +104,8 @@ public class ProdutoServiceUnitTest {
         produtoService = new ProdutoService(produtoRepository);
         produtoService.apagar(produto.getId());
 
-       // Mockito.verify(produtoRepository, Mockito.times(1)).deleteById(produto.getId());
+
+        Mockito.verify(produtoRepository, Mockito.times(1)).deleteById(produto.getId());
 
         Produto deletado = produtoService.obter(23);
         assertEquals(null, deletado);

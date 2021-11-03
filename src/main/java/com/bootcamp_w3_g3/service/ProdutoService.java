@@ -2,6 +2,7 @@ package com.bootcamp_w3_g3.service;
 
 import com.bootcamp_w3_g3.advisor.EntityNotFoundException;
 import com.bootcamp_w3_g3.model.entity.Produto;
+import com.bootcamp_w3_g3.model.entity.TipoProduto;
 import com.bootcamp_w3_g3.repository.ProdutoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,6 +16,7 @@ import java.util.List;
  * Bem como aplicar camada dde regra de negócios neccessária.
  *
  * @author Alex Cruz
+ * @author Joaquim Borges
  */
 
 @Service
@@ -46,8 +48,20 @@ public class ProdutoService {
         }
     }
 
-    public Produto obterPorCategoria(String tipoDeProduto){
-        return produtoRepository.findAllByTipoProduto(tipoDeProduto);
+
+
+    public List<Produto> listarPorCategoria(TipoProduto categoria){
+            switch (categoria) {
+                case CONGELADOS:
+                 return produtoRepository.findAllByTipoProduto(TipoProduto.CONGELADOS);
+
+                case FRESCOS:
+                    return produtoRepository.findAllByTipoProduto(TipoProduto.FRESCOS);
+
+                case REFRIGERADOS:
+                    return produtoRepository.findAllByTipoProduto(TipoProduto.REFRIGERADOS);
+            }
+            return null;
     }
 
     public List<Produto> listar() {

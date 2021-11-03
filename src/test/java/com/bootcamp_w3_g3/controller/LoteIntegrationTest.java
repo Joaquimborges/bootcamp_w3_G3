@@ -58,7 +58,7 @@ public class LoteIntegrationTest {
         Produto produto = Produto.builder()
                 .codigoDoProduto(123)
                 .nome("carne")
-                .preco(new BigDecimal(60))
+                .preco(60.0)
                 .build();
 
         return Lote.builder()
@@ -74,7 +74,7 @@ public class LoteIntegrationTest {
         Produto produto = Produto.builder()
                 .codigoDoProduto(123)
                 .nome("carne")
-                .preco(new BigDecimal(60))
+                .preco(60.0)
                 .build();
 
         return    Lote.builder()

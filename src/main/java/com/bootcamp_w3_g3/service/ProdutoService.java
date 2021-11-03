@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -30,7 +31,18 @@ public class ProdutoService {
     @Transactional
     public Produto salvar(Produto produto) { return produtoRepository.save(produto); }
 
-    public Produto obter(Integer codigo) { return produtoRepository.findByCodigoDoProduto(codigo); }
+    public Produto obter(Integer codigo) {
+        Produto produto = produtoRepository.findByCodigoDoProduto(codigo);
+        if (produto != null){
+            return produto;
+        }
+        throw  new EntityNotFoundException("produto não encontrado");
+    }
+
+
+    public Produto obterPorCategoria(String tipoDeProduto){
+        return produtoRepository.findAllByTipoProduto(tipoDeProduto);
+    }
 
     public List<Produto> listar() {
         return produtoRepository.findAll();

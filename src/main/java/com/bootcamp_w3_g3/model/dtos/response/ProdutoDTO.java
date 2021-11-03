@@ -19,13 +19,13 @@ public class ProdutoDTO {
 
     private Integer codigoDoProduto;
     private String nome;
-    private BigDecimal preco;
+    private Double preco;
     private Double temperaturaIndicada;
 
     public ProdutoDTO() {
     }
 
-    public ProdutoDTO(Integer codigoDoProduto, String nome, BigDecimal preco, Double temperaturaIndicada) {
+    public ProdutoDTO(Integer codigoDoProduto, String nome, Double preco, Double temperaturaIndicada) {
         this.codigoDoProduto = codigoDoProduto;
         this.nome = nome;
         this.preco = preco;

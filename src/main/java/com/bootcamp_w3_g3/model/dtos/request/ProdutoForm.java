@@ -1,6 +1,7 @@
 package com.bootcamp_w3_g3.model.dtos.request;
 
 import com.bootcamp_w3_g3.model.entity.Produto;
+import com.bootcamp_w3_g3.model.entity.TipoProduto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -24,8 +25,9 @@ public class ProdutoForm {
 
     private Integer codigoDoProduto;
     private String nome;
-    private BigDecimal preco;
+    private Double preco;
     private Double temperaturaIndicada;
+    private TipoProduto tipoProduto;
 
     /**
      *
@@ -38,6 +40,7 @@ public class ProdutoForm {
                 .codigoDoProduto(codigoDoProduto)
                 .nome(nome)
                 .preco(preco)
-                .temperaturaIndicada(temperaturaIndicada).build();
+                .temperaturaIndicada(temperaturaIndicada)
+                .tipoProduto(tipoProduto).build();
     }
 }

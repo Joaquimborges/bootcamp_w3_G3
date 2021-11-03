@@ -4,6 +4,7 @@ package com.bootcamp_w3_g3.service;
 /**
  * @author Matheus Willock
  */
+import com.bootcamp_w3_g3.advisor.EntityNotFoundException;
 import com.bootcamp_w3_g3.model.entity.Armazem;
 import com.bootcamp_w3_g3.model.entity.Representante;
 import com.bootcamp_w3_g3.repository.ArmazemRepository;
@@ -34,7 +35,13 @@ public class ArmazemService {
     }
 
     public Armazem obterArmazem(String cod) {
-        return armazemRepository.findByCodArmazem(cod);
+       Armazem armazem = armazemRepository.findByCodArmazem(cod);
+       if (armazem != null){
+           return armazem;
+       } else{
+           throw new EntityNotFoundException("armazem não encontrado");
+       }
+
     }
 
     public Armazem deletarArmazem(Long id){

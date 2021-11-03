@@ -6,6 +6,8 @@ package com.bootcamp_w3_g3.model.entity;
 import lombok.*;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Getter
@@ -17,6 +19,7 @@ import javax.persistence.Id;
 public class Comprador {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long Id;
 
     private String usuario;

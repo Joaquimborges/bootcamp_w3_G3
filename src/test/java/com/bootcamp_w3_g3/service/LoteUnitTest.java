@@ -34,7 +34,7 @@ public class LoteUnitTest {
     Produto produto = Produto.builder()
             .codigoDoProduto(123)
             .nome("carne")
-            .preco(new BigDecimal(60))
+            .preco(60.0)
             .build();
 
 

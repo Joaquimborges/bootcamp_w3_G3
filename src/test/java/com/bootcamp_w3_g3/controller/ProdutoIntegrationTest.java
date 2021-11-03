@@ -18,7 +18,6 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 import static org.hamcrest.Matchers.is;
 
-import java.math.BigDecimal;
 
 /**
  * @autor Joaquim Borges
@@ -45,7 +44,7 @@ public class ProdutoIntegrationTest {
         return ProdutoForm.builder()
                 .codigoDoProduto(1234)
                 .nome("carne seca")
-                .preco(new BigDecimal(50))
+                .preco(50.0)
                 .temperaturaIndicada(16.0)
                 .build();
     }
@@ -59,7 +58,7 @@ public class ProdutoIntegrationTest {
         return ProdutoForm.builder()
                 .codigoDoProduto(novoProduto.getCodigoDoProduto())
                 .temperaturaIndicada(null)
-                .preco(new BigDecimal(60)).build();
+                .preco(60.0).build();
     }
 
     private Produto converte(ProdutoForm produtoForm) {
@@ -95,7 +94,7 @@ public class ProdutoIntegrationTest {
         ProdutoForm produto = ProdutoForm.builder()
                 .codigoDoProduto(1234)
                 .nome("carne seca")
-                .preco(new BigDecimal(50))
+                .preco(60.0)
                 .temperaturaIndicada(16.0)
                 .build();
 
@@ -120,7 +119,7 @@ public class ProdutoIntegrationTest {
         ProdutoForm produtoAlterado = ProdutoForm.builder()
                 .codigoDoProduto(1234)
                 .nome("carne de sol")
-                .preco(new BigDecimal(50))
+                .preco(60.0)
                 .temperaturaIndicada(16.0)
                 .build();
 

@@ -18,6 +18,9 @@ public interface ProdutoRepository extends JpaRepository<Produto, Long>{
 
     Produto deleteProdutosByCodigoDoProduto(Integer codigo);
 
+    Produto findAllByTipoProduto(String tipoDeProduto);
+
+
 }
 
 

@@ -3,11 +3,11 @@ package com.bootcamp_w3_g3.service;
 import com.bootcamp_w3_g3.model.entity.Carrinho;
 import com.bootcamp_w3_g3.model.entity.Itens;
 import com.bootcamp_w3_g3.repository.CarrinhoRepository;
-import com.bootcamp_w3_g3.repository.ItensRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -34,11 +34,22 @@ public class CarrinhoService {
 
     public Carrinho atualizar(Carrinho carrinho) {
         Carrinho carrinhoEdited = carrinhoRepository.getById(carrinho.getId());
-        carrinhoEdited.setCodigoComprador(carrinho.getCodigoComprador());
         carrinhoEdited.setDataDeOrdem(carrinho.getDataDeOrdem());
         carrinhoEdited.setItensList(carrinho.getItensList());
         carrinhoEdited.setStatusCompra(carrinho.getStatusCompra());
 
         return carrinhoRepository.save(carrinhoEdited);
     }
+
+    public BigDecimal retornaPrecoDosItens(Carrinho carrinho) {
+        double valorTotal = 0.0;
+        for (Itens item : carrinho.getItensList()) {
+            valorTotal += item.getProduto().getPreco() * item.getQuantidade();
+        }
+        return new BigDecimal(valorTotal);
+    }
+
+
+
+
 }

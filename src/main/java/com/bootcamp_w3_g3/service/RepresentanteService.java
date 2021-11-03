@@ -1,5 +1,6 @@
 package com.bootcamp_w3_g3.service;
 
+import com.bootcamp_w3_g3.advisor.EntityNotFoundException;
 import com.bootcamp_w3_g3.model.entity.Representante;
 import com.bootcamp_w3_g3.repository.RepresentanteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +31,13 @@ public class RepresentanteService {
         return representanteRepository.save(representante);
     }
 
-    public Representante obter(String codigo) { return representanteRepository.findByCodigo(codigo); }
+    public Representante obter(String codigo) {
+        Representante representante = representanteRepository.findByCodigo(codigo);
+        if (representante != null ){
+            return representante;
+        }
+        throw new EntityNotFoundException("representante não encontrado");
+    }
 
     public List<Representante> listar() {
         return representanteRepository.findAll();

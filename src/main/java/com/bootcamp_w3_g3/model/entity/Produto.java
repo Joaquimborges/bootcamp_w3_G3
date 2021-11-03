@@ -26,8 +26,9 @@ public class Produto {
   
     private Integer codigoDoProduto;
     private String nome;
-    private BigDecimal preco;
+    private Double preco;
     private Double temperaturaIndicada;
+    private TipoProduto tipoProduto;
 
 
 

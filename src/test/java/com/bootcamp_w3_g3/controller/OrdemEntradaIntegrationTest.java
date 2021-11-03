@@ -69,7 +69,7 @@ public class OrdemEntradaIntegrationTest {
         return ProdutoForm.builder()
                 .codigoDoProduto(novoProduto.getCodigoDoProduto())
                 .temperaturaIndicada(null)
-                .preco(new BigDecimal(60)).build();
+                .preco(60.0).build();
     }
 
     private LoteForm payloadLote(LoteForm loteForm) {
@@ -238,7 +238,7 @@ public class OrdemEntradaIntegrationTest {
         Produto produto = this.produtoService.salvar(
                 Produto.builder()
                         .codigoDoProduto(222)
-                        .preco(new BigDecimal(60))
+                        .preco(60.0)
                         .nome("picanha")
                         .temperaturaIndicada(12.1)
                         .build());

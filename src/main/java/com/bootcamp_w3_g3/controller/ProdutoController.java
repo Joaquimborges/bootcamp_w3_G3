@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 /**
  * @author: Marcelo de Oliveira Santos
@@ -76,7 +77,21 @@ public class ProdutoController {
     @GetMapping("/listar")
     public ResponseEntity<List<ProdutoDTO>> listar()
     {
-        List<Produto> produtos = produtoService.listar();
-        return new ResponseEntity<>(ProdutoDTO.convert(produtos), HttpStatus.OK);
+        try {
+            List<Produto> produtos = produtoService.listar();
+            return new ResponseEntity<>(ProdutoDTO.convert(produtos), HttpStatus.OK);
+        } catch (NoSuchElementException e){
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+
+    }
+
+    @GetMapping("/listar/{categoria}")
+    public ResponseEntity<Produto> listarPorCategoria(@PathVariable String categoria){
+        try {
+            return new ResponseEntity<>(produtoService.obterPorCategoria(categoria), HttpStatus.OK);
+        }catch (Exception e){
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 }

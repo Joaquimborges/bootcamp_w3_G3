@@ -1,5 +1,6 @@
 package com.bootcamp_w3_g3.service;
 
+import com.bootcamp_w3_g3.advisor.EntityNotFoundException;
 import com.bootcamp_w3_g3.model.entity.Setor;
 import com.bootcamp_w3_g3.repository.SetorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,8 +36,11 @@ public class SetorService {
     }
 
     public Setor obterSetor(String codigo){
-       return setorRepository.findByCodigo(codigo);
-
+       Setor setor = setorRepository.findByCodigo(codigo);
+       if (setor != null){
+           return setor;
+       }
+       throw new EntityNotFoundException("setor não encontrado");
     }
 
     public List<Setor> listarSetores(){

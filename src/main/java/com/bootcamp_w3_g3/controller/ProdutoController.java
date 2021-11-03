@@ -4,6 +4,7 @@ import com.bootcamp_w3_g3.model.dtos.response.ProdutoDTO;
 import com.bootcamp_w3_g3.model.entity.Produto;
 import com.bootcamp_w3_g3.model.entity.TipoProduto;
 import com.bootcamp_w3_g3.repository.ProdutoRepository;
+import com.bootcamp_w3_g3.service.CarrinhoService;
 import com.bootcamp_w3_g3.service.ProdutoService;
 import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +28,9 @@ public class ProdutoController {
 
     @Autowired
     private ProdutoService produtoService;
+
+    @Autowired
+    private CarrinhoService carrinhoService;
 
     /**
      * Create do CRUD
@@ -94,5 +98,10 @@ public class ProdutoController {
         }catch (Exception e){
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
+    }
+
+    @GetMapping("/carrinho/{idCarrinho}")
+    public ResponseEntity<List<Produto>> mostrarProdutosDoPedido(@PathVariable Long idCarrinho) {
+        return new ResponseEntity<>(carrinhoService.mostrarProdutosDoPedido(idCarrinho), HttpStatus.OK);
     }
 }

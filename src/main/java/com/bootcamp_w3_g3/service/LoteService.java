@@ -37,7 +37,10 @@ public class LoteService {
 
     @Transactional
     public Lote salvar(Lote lote) {
-
+        Produto produto = this.produtoService.obter(lote.getProduto().getCodigoDoProduto());
+        Setor setor = this.setorService.obterSetor(lote.getSetor().getCodigo());
+        lote.setSetor(setor);
+        lote.setProduto(produto);
         return loteRepository.save(lote);
     }
 

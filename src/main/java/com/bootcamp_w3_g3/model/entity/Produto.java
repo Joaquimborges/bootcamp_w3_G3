@@ -29,8 +29,7 @@ public class Produto {
     private Double preco;
     private Double temperaturaIndicada;
     private TipoProduto tipoProduto;
-    @ManyToOne
-    private Lote lote;
+    private Integer codLote;
 
 
 

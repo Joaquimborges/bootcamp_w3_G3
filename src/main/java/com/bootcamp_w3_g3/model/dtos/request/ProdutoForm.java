@@ -30,7 +30,6 @@ public class ProdutoForm {
     private Double preco;
     private Double temperaturaIndicada;
     private TipoProduto tipoProduto;
-    private Integer numeroDoLote;
 
     /**
      *
@@ -39,13 +38,12 @@ public class ProdutoForm {
      * @return produto
      */
     public Produto convert(LoteService loteService){
-        Lote lote = loteService.obter(this.numeroDoLote);
         return Produto.builder()
                 .codigoDoProduto(codigoDoProduto)
                 .nome(nome)
                 .preco(preco)
                 .temperaturaIndicada(temperaturaIndicada)
                 .tipoProduto(tipoProduto)
-                .lote(lote).build();
+                .build();
     }
 }

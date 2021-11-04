@@ -3,6 +3,7 @@ package com.bootcamp_w3_g3.service;
 import com.bootcamp_w3_g3.model.entity.Armazem;
 import com.bootcamp_w3_g3.model.entity.Representante;
 import com.bootcamp_w3_g3.model.entity.Setor;
+import com.bootcamp_w3_g3.model.entity.TipoProduto;
 import com.bootcamp_w3_g3.repository.SetorRepository;
 import org.junit.Assert;
 import org.junit.jupiter.api.Test;
@@ -41,14 +42,14 @@ public class SetorUnitTest {
             .id(SETOR_ID)
             .codigo("123")
             .nome("Setor123")
-            .tipoProduto("Frescos")
+            .tipoProduto(TipoProduto.FRESCOS)
             .armazem(armazem1).build();
 
 
     Setor setor2 = Setor.builder()
             .codigo("124")
             .nome("Setor124")
-            .tipoProduto("Congelados")
+            .tipoProduto(TipoProduto.CONGELADOS)
             .armazem(armazem1).build();
 
 
@@ -98,7 +99,7 @@ public class SetorUnitTest {
     void atualizarSetorTest(){
         setor1.setCodigo("1234");
         setor1.setNome("Setor1234");
-        setor1.setTipoProduto("Frescos01");
+        setor1.setTipoProduto(TipoProduto.FRESCOS);
 
         Mockito.when(setorRepository.findByCodigo(Mockito.any(String.class))).thenReturn(setor1);
         Mockito.when(setorRepository.save(Mockito.any(Setor.class))).thenReturn(setor1);

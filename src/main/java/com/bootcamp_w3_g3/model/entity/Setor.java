@@ -23,7 +23,7 @@ public class Setor {
     private Long id;
     private String codigo;
     private String nome;
-    private String tipoProduto;
+    private TipoProduto tipoProduto;
 
     private Integer espacoDisponivel = 100;
 

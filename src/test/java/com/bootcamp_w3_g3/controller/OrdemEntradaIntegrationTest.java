@@ -231,7 +231,7 @@ public class OrdemEntradaIntegrationTest {
                         .nome("Setor de frescos")
                         .armazem(armazem)
                         .espacoDisponivel(40)
-                        .tipoProduto("FRESCOS")
+                        .tipoProduto(TipoProduto.FRESCOS)
                         .build());
 
         Produto produto = this.produtoService.salvar(

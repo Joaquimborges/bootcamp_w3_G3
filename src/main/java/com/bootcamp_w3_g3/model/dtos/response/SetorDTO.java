@@ -18,7 +18,7 @@ public class SetorDTO {
 
     private String codigo;
     private String nome;
-    private String tipoProduto;
+    private TipoProduto tipoProduto;
     private ArmazemDTO armazemDTO;
 
     public static SetorDTO converter(Setor setor){

@@ -71,14 +71,14 @@ public class OrdemDeEntradaUnitTest {
             .id(SETOR_ID)
             .codigo("123")
             .nome("Setor123")
-            .tipoProduto("Congelados")
+            .tipoProduto(TipoProduto.CONGELADOS)
             .armazem(armazem1).build();
 
     Setor setor2 = Setor.builder()
             .id(SETOR_ID)
             .codigo("2")
             .nome("Setor2")
-            .tipoProduto("Frescos")
+            .tipoProduto(TipoProduto.FRESCOS)
             .armazem(armazem1).build();
 
     Produto produto = Produto.builder()

@@ -21,7 +21,7 @@ public class SetorForm {
 
     private String codigo;
     private String nome;
-    private String tipoProduto;
+    private TipoProduto tipoProduto;
     private ArmazemForm armazem;
     private Integer espacoDisponivel = 100;
 

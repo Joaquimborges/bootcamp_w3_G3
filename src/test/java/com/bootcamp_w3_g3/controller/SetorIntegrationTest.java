@@ -6,6 +6,7 @@ import com.bootcamp_w3_g3.model.dtos.request.SetorForm;
 import com.bootcamp_w3_g3.model.entity.Armazem;
 import com.bootcamp_w3_g3.model.entity.Representante;
 import com.bootcamp_w3_g3.model.entity.Setor;
+import com.bootcamp_w3_g3.model.entity.TipoProduto;
 import com.bootcamp_w3_g3.service.ArmazemService;
 import com.bootcamp_w3_g3.service.RepresentanteService;
 import com.bootcamp_w3_g3.service.SetorService;
@@ -170,7 +171,7 @@ public class SetorIntegrationTest {
 
 
         return SetorForm.builder()
-                .tipoProduto("frescos")
+                .tipoProduto(TipoProduto.FRESCOS)
                 .nome("Setor de frescos")
                 .armazem(armazemSetor)
                 .espacoDisponivel(100)
@@ -206,7 +207,7 @@ public class SetorIntegrationTest {
         SetorForm setorForm = SetorForm.builder()
                 .codigo("S-987")
                 .nome("carne")
-                .tipoProduto("frescos")
+                .tipoProduto(TipoProduto.FRESCOS)
                 .espacoDisponivel(100).build();
 
         this.persisteSetor(setorForm);

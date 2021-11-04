@@ -114,7 +114,7 @@ public class CarrinhoService {
      * @autor Joaquim Borges
      */
     public boolean produtoVencido(Produto produto){
-        Lote loteDoProduto = loteService.obter(produto.getLote().getNumero());
+        Lote loteDoProduto = loteService.obter(produto.getCodLote());
         long dias = ChronoUnit.DAYS
                 .between(loteDoProduto.getDataDeFabricacao(), loteDoProduto.getDataDeValidade());
         return dias < 23;

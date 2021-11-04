@@ -335,7 +335,7 @@ public class ProdutoIntegrationTest {
 
         LoteForm loteDoProduto = this.payloadPersistidoLote(loteForm);
         ProdutoForm produto = payloadProduto();
-        produto.setNumeroDoLote(loteDoProduto.getNumero());
+        //produto.setNumeroDoLote(loteDoProduto.getNumero());
         String requestPayload = objectMapper.writeValueAsString(produto);
 
         this.mockMvc.perform(post("http://localhost:8080/produtos/cadastra")
@@ -362,7 +362,6 @@ public class ProdutoIntegrationTest {
                 .codigoDoProduto(654)
                 .nome("carne seca")
                 .preco(60.0)
-                .numeroDoLote(loteDoProduto.getNumero())
                 .temperaturaIndicada(16.0)
                 .build();
 
@@ -401,7 +400,6 @@ public class ProdutoIntegrationTest {
                 .codigoDoProduto(12341)
                 .nome("carne de sol")
                 .preco(60.0)
-                .numeroDoLote(675)
                 .temperaturaIndicada(16.0)
                 .build();
 
@@ -412,14 +410,12 @@ public class ProdutoIntegrationTest {
                 .quantidadeMinina(2).temperaturaAtual(18.1).temperaturaMinima(13.2).build();
 
         LoteForm loteDoProduto = this.payloadPersistidoLote3(loteForm);
-        produto.setNumeroDoLote(loteDoProduto.getNumero());
         this.persisteProduto(produto);
 
         ProdutoForm produtoAlterado = ProdutoForm.builder()
                 .codigoDoProduto(12341)
                 .nome("carne de sol")
                 .preco(60.0)
-                .numeroDoLote(675)
                 .temperaturaIndicada(16.0)
                 .build();
 

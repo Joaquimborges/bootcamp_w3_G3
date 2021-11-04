@@ -136,7 +136,7 @@ public class OrdemDeEntradaService {
         return armazemExiste(ordemDeEntrada.getSetor().getArmazem().getCodArmazem()) &&
                 representantePertenceAoArmazem(ordemDeEntrada.getRepresentante().getCodigo()) &&
                 setorExiste(ordemDeEntrada.getSetor().getCodigo()) &&
-                setorCorrespondeAoTipoDeProduto(ordemDeEntrada.getSetor().getTipoProduto()) &&
+                setorCorrespondeAoTipoDeProduto(ordemDeEntrada.getSetor().getTipoProduto().toString()) &&
                 cabeNoSetor(ordemDeEntrada.getSetor().getEspacoDisponivel(), ordemDeEntrada.getSetor().getCodigo());
     }
 

@@ -3,6 +3,7 @@ package com.bootcamp_w3_g3.service;
 
 import com.bootcamp_w3_g3.model.entity.*;
 import com.bootcamp_w3_g3.repository.OrdemDeEntradaRepository;
+import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,18 +18,26 @@ import javax.transaction.Transactional;
  * @author Hugo Damm
  */
 @Service
+@NoArgsConstructor
+
 public class OrdemDeEntradaService {
-    @Autowired
+
+
     private OrdemDeEntradaRepository ordemDeEntradaRepository;
-    @Autowired
-    private final RepresentanteService representanteService;
-    @Autowired
-    private final ArmazemService armazemService;
-    @Autowired
-    private final SetorService setorService;
-    @Autowired
+
+
+    private RepresentanteService representanteService;
+
+
+    private ArmazemService armazemService;
+
+
+    private  SetorService setorService;
+
+
     private VendedorService vendedorService;
-    @Autowired
+
+
     private LoteService loteService;
 
 
@@ -40,8 +49,11 @@ public class OrdemDeEntradaService {
         this.representanteService = representanteService;
         this.armazemService = armazemService;
         this.setorService = setorService;
+        this.ordemDeEntradaRepository = ordemDeEntradaRepository;
 
     }
+
+
 
     /**
      * @autor Joaquim Borges
@@ -109,7 +121,7 @@ public class OrdemDeEntradaService {
         }
         return   (setorService.listarSetores().stream()
                 .filter(s-> s.getCodigo().equals(codSetor))
-                        .findFirst()).get().getEspacoDisponivel() >= quantidadeAtual;
+                .findFirst()).get().getEspacoDisponivel() >= quantidadeAtual;
 
     }
 
@@ -150,23 +162,38 @@ public class OrdemDeEntradaService {
         return ordemDeEntradaRepository.findByNumeroDaOrdem(numeroOrdem);
     }
 
-    public OrdemDeEntrada atualizaOrdem(OrdemDeEntrada ordemDeEntrada) {
-        if (ordemDeEntrada != null) {
+    public OrdemDeEntrada atualizaOrdem( OrdemDeEntrada ordemDeEntrada) {
+        if (ordemDeEntrada != null)
+        {
             OrdemDeEntrada ordemDeEntradaAlterada = retornaOrdem(ordemDeEntrada.getNumeroDaOrdem());
-            ordemDeEntradaAlterada.setLote(ordemDeEntrada.getLote());
-            loteService.atualizar(ordemDeEntrada.getLote());
-            ordemDeEntradaAlterada.setRepresentante(ordemDeEntrada.getRepresentante());
-            representanteService.atualizar(ordemDeEntrada.getRepresentante());
-            ordemDeEntradaAlterada.setSetor(ordemDeEntrada.getSetor());
-            setorService.atualizarSetor(ordemDeEntrada.getSetor());
-            ordemDeEntradaAlterada.setVendedor(ordemDeEntrada.getVendedor());
-            vendedorService.atualizar(ordemDeEntrada.getVendedor());
-            ordemDeEntradaAlterada.setDataDaOrdem(ordemDeEntrada.getDataDaOrdem());
+            if (ordemDeEntradaAlterada == null)
+            {
+                return null;
+            }
 
-            return ordemDeEntradaRepository.save(ordemDeEntradaAlterada);
+            else
+            {
+                ordemDeEntradaAlterada.setLote(ordemDeEntrada.getLote());
+                loteService.atualizar(ordemDeEntrada.getLote());
+                ordemDeEntradaAlterada.setRepresentante(ordemDeEntrada.getRepresentante());
+                representanteService.atualizar(ordemDeEntrada.getRepresentante());
+                ordemDeEntradaAlterada.setSetor(ordemDeEntrada.getSetor());
+                setorService.atualizarSetor(ordemDeEntrada.getSetor());
+                ordemDeEntradaAlterada.setVendedor(ordemDeEntrada.getVendedor());
+                vendedorService.atualizar(ordemDeEntrada.getVendedor());
+                ordemDeEntradaAlterada.setDataDaOrdem(ordemDeEntrada.getDataDaOrdem());
+                OrdemDeEntrada atual =  ordemDeEntradaRepository.save(ordemDeEntradaAlterada);
+                if (atual == null) return ordemDeEntrada;
+                return atual;
+            }
+
         }
-         return null;
+        return null;
     }
 
 
+    public OrdemDeEntrada obter(Integer numeroDaOrdem) {
+
+        return ordemDeEntradaRepository.findByNumeroDaOrdem(numeroDaOrdem);
+    }
 }

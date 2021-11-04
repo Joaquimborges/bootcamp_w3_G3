@@ -30,6 +30,10 @@ public class LoteService {
     @Autowired
     private SetorService setorService;
 
+    public LoteService(LoteRepository loteRepository) {
+        this.loteRepository = loteRepository;
+    }
+
 
     @Transactional
     public Lote salvar(Lote lote) {

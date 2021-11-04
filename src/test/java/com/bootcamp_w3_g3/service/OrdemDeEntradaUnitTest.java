@@ -10,7 +10,7 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * @author hugo damm
@@ -18,23 +18,27 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
  */
 public class OrdemDeEntradaUnitTest {
 
-    OrdemDeEntradaService ordemDeEntradaService;
+
+    VendedorRepository vendedorRepository = Mockito.mock(VendedorRepository.class);
+    VendedorService vendedorService = new VendedorService(vendedorRepository);
+
+
+    LoteRepository loteRepository = Mockito.mock(LoteRepository.class);
+    LoteService loteService = new LoteService(loteRepository);
+
+
+    RepresentanteRepository representanteRepository = Mockito.mock(RepresentanteRepository.class);
+    RepresentanteService representanteService = new RepresentanteService(representanteRepository);
+
+    ArmazemRepository armazemRepository = Mockito.mock(ArmazemRepository.class);
+    ArmazemService armazemService = new ArmazemService(armazemRepository);
+
+    SetorRepository setorRepository = Mockito.mock(SetorRepository.class);
+    SetorService setorService = new SetorService(setorRepository);
+
     OrdemDeEntradaRepository ordemDeEntradaRepository = Mockito.mock(OrdemDeEntradaRepository.class);
 
-    VendedorService vendedorService;
-    VendedorRepository vendedorRepository = Mockito.mock(VendedorRepository.class);
-
-    LoteService loteService;
-    LoteRepository loteRepository = Mockito.mock(LoteRepository.class);
-
-    RepresentanteService representanteService;
-    RepresentanteRepository representanteRepository = Mockito.mock(RepresentanteRepository.class);
-
-    ArmazemService armazemService;
-    ArmazemRepository armazemRepository = Mockito.mock(ArmazemRepository.class);
-
-    SetorService setorService;
-    SetorRepository setorRepository = Mockito.mock(SetorRepository.class);
+    OrdemDeEntradaService ordemDeEntradaService = new OrdemDeEntradaService(ordemDeEntradaRepository, representanteService, armazemService, setorService );
 
     private static final Long SETOR_ID = Long.valueOf(1);
 
@@ -124,19 +128,45 @@ public class OrdemDeEntradaUnitTest {
             .build();
 
     @Test
-    void registrarOrdemDeEntradaTest(){
+    void registrarOrdemDeEntradaTest()
+    {
         ordemDeEntrada.setSetor(setor1);
         Mockito.when(setorRepository.save(Mockito.any(Setor.class))).thenReturn(setor1);
-
-        setorService = new SetorService(setorRepository);
         setorService.salvarSetor(setor1);
-
         Mockito.when(ordemDeEntradaRepository.save(Mockito.any(OrdemDeEntrada.class))).thenReturn(ordemDeEntrada);
 
-        ordemDeEntradaService = new OrdemDeEntradaService(ordemDeEntradaRepository, representanteService, armazemService, setorService);
         ordemDeEntradaService.registra(ordemDeEntrada);
-
         assertNotNull(ordemDeEntrada);
+    }
+
+    @Test
+    void alterarOrdemDeEntradaTest() {
+
+        //alteração do setor - preparação
+        ordemDeEntrada.setLote(lote);
+        ordemDeEntrada.setRepresentante(representante1);
+        ordemDeEntrada.setSetor(setor1);
+        ordemDeEntrada.setVendedor(vendedor1);
+
+        ordemDeEntradaService = Mockito.mock(OrdemDeEntradaService.class);
+
+        Mockito.when(loteRepository.save(Mockito.any(Lote.class))).thenReturn(lote);
+        Mockito.when(representanteRepository.save(Mockito.any(Representante.class))).thenReturn(representante1);
+        Mockito.when(setorRepository.save(Mockito.any(Setor.class))).thenReturn(setor1);
+        Mockito.when(vendedorRepository.save(Mockito.any(Vendedor.class))).thenReturn(vendedor);
+        Mockito.when(ordemDeEntradaRepository.findByNumeroDaOrdem(Mockito.any(Integer.class))).thenReturn(ordemDeEntrada);
+        Mockito.when(ordemDeEntradaRepository.save(Mockito.any(OrdemDeEntrada.class))).thenReturn(ordemDeEntrada);
+        Mockito.when(ordemDeEntradaService.atualizaOrdem(ordemDeEntrada)).thenReturn(ordemDeEntrada);
+
+        ordemDeEntradaService.atualizaOrdem(ordemDeEntrada);
+        OrdemDeEntrada atualizado = ordemDeEntradaService.obter(ordemDeEntrada.getNumeroDaOrdem());
+        if (atualizado != null) {
+            Mockito.verify(ordemDeEntradaService, Mockito.times(1)).atualizaOrdem(ordemDeEntrada);
+            assertNotNull(atualizado);
+            assertNotEquals(atualizado.getVendedor(), ordemDeEntrada.getVendedor());
+
+        }
+
     }
 
 }

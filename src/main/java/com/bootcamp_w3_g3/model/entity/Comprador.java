@@ -3,10 +3,7 @@ package com.bootcamp_w3_g3.model.entity;
 
 import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 /**
  * @author Math Willock
@@ -31,5 +28,7 @@ public class Comprador {
     private String cpf;
     private String telefone;
     private String endereco;
+    @OneToOne
+    private Carteira carteira;
 
 }

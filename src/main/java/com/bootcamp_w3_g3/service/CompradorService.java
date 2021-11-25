@@ -1,6 +1,7 @@
 package com.bootcamp_w3_g3.service;
 
 import com.bootcamp_w3_g3.advisor.EntityNotFoundException;
+import com.bootcamp_w3_g3.model.entity.Carteira;
 import com.bootcamp_w3_g3.model.entity.Comprador;
 import com.bootcamp_w3_g3.repository.CompradorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,8 @@ public class CompradorService {
 
 
     private CompradorRepository compradorRepository;
+    @Autowired
+    private CarteiraService carteiraService;
 
     @Autowired
     public CompradorService(CompradorRepository compradorRepository){
@@ -41,6 +44,8 @@ public class CompradorService {
         if( copCod == null && copCPF == null && validateCpf == 11 && nome != null && !nome.equals("") && !nome.equals(" ")
                 && sobrenome != null && !sobrenome.equals("") && !sobrenome.equals(" ")
         ) {
+            Carteira carteira = carteiraService.criar(comprador.getCodigo());
+            comprador.setCarteira(carteira);
             return compradorRepository.save(comprador);
         } if (sobrenome == null || sobrenome.equals("") || sobrenome.equals(" ")) {
             throw new EntityNotFoundException("sobrenome inválido");

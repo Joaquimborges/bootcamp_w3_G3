@@ -1,10 +1,7 @@
 package com.bootcamp_w3_g3.service;
 
 import com.bootcamp_w3_g3.advisor.EntityNotFoundException;
-import com.bootcamp_w3_g3.model.entity.Carrinho;
-import com.bootcamp_w3_g3.model.entity.Itens;
-import com.bootcamp_w3_g3.model.entity.Lote;
-import com.bootcamp_w3_g3.model.entity.Produto;
+import com.bootcamp_w3_g3.model.entity.*;
 import com.bootcamp_w3_g3.repository.CarrinhoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,6 +23,8 @@ public class CarrinhoService {
     private CarrinhoRepository carrinhoRepository;
 
     private LoteService loteService;
+    private CompradorService compradorService;
+    private CarteiraService carteiraService;
 
     @Autowired
     public CarrinhoService(CarrinhoRepository carrinhoRepository, LoteService loteService){
@@ -47,9 +46,13 @@ public class CarrinhoService {
                     return new BigDecimal("00.0");
 
                 case CONCLUIDO:
+                    Comprador comprador = compradorService.obter(carrinho.getCodigoComprador());
+                    double valorPedido = retornaPrecoDosItens(carrinhoRepository.save(carrinho)).doubleValue();
+
+                    carteiraService.retira(comprador.getCarteira().getNumero(), valorPedido);
                     decrementaDoLote(itens);
-                    Carrinho carrinhoSalvo = carrinhoRepository.save(carrinho);
-                    return retornaPrecoDosItens(carrinhoSalvo);
+
+                    return BigDecimal.valueOf(valorPedido);
             }
         }
         return null;

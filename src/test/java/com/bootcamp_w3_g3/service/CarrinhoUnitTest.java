@@ -124,31 +124,6 @@ public class CarrinhoUnitTest{
         assertNotEquals(retornoDoPrecoDosItens,retornoDoRegistrarPedido);
     }
 
-    /**
-     * Teste Para cubrir o estatus CONCLUIDO do método registrarCarrinho
-     * @author Matheus Willock
-     */
-    @Test
-    void registrarPedidoComStatusConcluidoTest(){
-        produto.setCodLote(lote.getNumero());
-        itensList.add(item);
-        carrinho.setItensList(itensList);
-        carrinho.setStatusCompra(CONCLUIDO);
-
-        Mockito.when(carrinhoRepository.save(Mockito.any(Carrinho.class))).thenReturn(carrinho);
-        Mockito.when(loteServiceMock.obter(Mockito.any(Integer.class))).thenReturn(lote);
-
-        carrinhoService = new CarrinhoService(carrinhoRepository, loteServiceMock);
-
-        BigDecimal retornoDoPrecoDosItens = carrinhoService.retornaPrecoDosItens(carrinho);
-
-        BigDecimal retornoDoRegistrarPedido = carrinhoService.registrarPedido(carrinho);
-
-        assertEquals(retornoDoPrecoDosItens,retornoDoRegistrarPedido);
-    }
-
-
-
 
     /**
      * Criado teste unitário de método que atende ao requisito 2

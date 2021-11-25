@@ -45,11 +45,13 @@ public class CompradorController {
         return new ResponseEntity<>(CompradorDTO.converter(comprador), HttpStatus.OK);
     }
 
+    @ApiOperation("Realiza deposito na conta do comprador.")
     @GetMapping("/carteira/depositar/{codigo}/{valor}")
     public ResponseEntity<Carteira> depositar(@PathVariable String codigo, @PathVariable Double valor){
         return new ResponseEntity<>(carteiraService.deposita(codigo, valor), HttpStatus.OK);
     }
 
+    @ApiOperation("Efetua a consulta do saldo da carteira do comprador")
     @GetMapping("/carteira/saldo/{codigo}")
     public ResponseEntity<Double> consultarSaldo(@PathVariable String codigo) {
         return new ResponseEntity<>(carteiraService.consultarSaldo(codigo), HttpStatus.OK);

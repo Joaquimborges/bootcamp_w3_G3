@@ -1,6 +1,8 @@
 package com.bootcamp_w3_g3.service;
 
+import com.bootcamp_w3_g3.model.entity.Carteira;
 import com.bootcamp_w3_g3.model.entity.Comprador;
+import com.bootcamp_w3_g3.repository.CarteiraRepository;
 import com.bootcamp_w3_g3.repository.CompradorRepository;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -18,8 +20,10 @@ import static org.junit.jupiter.api.Assertions.*;
 public class CompradorUnitTest{
 
     CompradorService compradorService;
+    CarteiraService carteiraService = Mockito.mock(CarteiraService.class);
 
     CompradorRepository compradorRepository = Mockito.mock(CompradorRepository.class);
+    CarteiraRepository carteiraRepository = Mockito.mock(CarteiraRepository.class);
 
     Comprador comprador  = Comprador.builder()
             .nome("Alex")
@@ -37,13 +41,17 @@ public class CompradorUnitTest{
             .endereco("Rua Copacabana")
             .build();
 
+        Carteira carteira = Carteira.builder()
+                .numero("MFC-C-23").saldo(100.0).build();
+
     List<Comprador> compradorList = new ArrayList<>();
 
     @Test
     void salvarCompradorTest(){
         Mockito.when(compradorRepository.save(Mockito.any(Comprador.class))).thenReturn(comprador);
+        Mockito.when(carteiraRepository.save(Mockito.any(Carteira.class))).thenReturn(carteira);
 
-        compradorService = new CompradorService(compradorRepository);
+        compradorService = new CompradorService(compradorRepository, carteiraService);
         Comprador salvo = compradorService.salvar(comprador);
 
         Mockito.verify(compradorRepository, Mockito.times(1)).save(comprador);
@@ -60,7 +68,7 @@ public class CompradorUnitTest{
         Mockito.when(compradorRepository.getByCodigo(Mockito.any(String.class))).thenReturn(comprador);
         Mockito.when(compradorRepository.save(Mockito.any(Comprador.class))).thenReturn(comprador);
 
-        compradorService = new CompradorService(compradorRepository);
+        compradorService = new CompradorService(compradorRepository, carteiraService);
         Comprador compradorAtualizado = compradorService.atualizar(comprador);
 
         Mockito.verify(compradorRepository, Mockito.times(1)).getByCodigo(comprador.getCodigo());
@@ -75,7 +83,7 @@ public class CompradorUnitTest{
     void obterCompradorTest(){
         Mockito.when(compradorRepository.findByCodigo(Mockito.any(String.class))).thenReturn(comprador2);
 
-        compradorService = new CompradorService(compradorRepository);
+        compradorService = new CompradorService(compradorRepository, carteiraService);
         Comprador compradorObtido = compradorService.obter(comprador2.getNome());
 
         Mockito.verify(compradorRepository, Mockito.times(1)).findByCodigo((comprador2.getNome()));

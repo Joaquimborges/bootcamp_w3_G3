@@ -22,8 +22,9 @@ public class CompradorService {
     private CarteiraService carteiraService;
 
     @Autowired
-    public CompradorService(CompradorRepository compradorRepository){
+    public CompradorService(CompradorRepository compradorRepository, CarteiraService carteiraService){
         this.compradorRepository = compradorRepository;
+        this.carteiraService = carteiraService;
     }
 
     /**

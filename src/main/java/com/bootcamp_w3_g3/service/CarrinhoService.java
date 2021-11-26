@@ -23,13 +23,16 @@ public class CarrinhoService {
     private CarrinhoRepository carrinhoRepository;
 
     private LoteService loteService;
+    @Autowired
     private CompradorService compradorService;
+    @Autowired
     private CarteiraService carteiraService;
 
     @Autowired
-    public CarrinhoService(CarrinhoRepository carrinhoRepository, LoteService loteService){
+    public CarrinhoService(CarrinhoRepository carrinhoRepository, LoteService loteService, CompradorService compradorService){
         this.carrinhoRepository = carrinhoRepository;
         this.loteService = loteService;
+        this.compradorService = compradorService;
     }
 
     @Transactional

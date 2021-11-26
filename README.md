@@ -30,6 +30,9 @@ $ git clone git@github.com:Joaquimborges/bootcamp_w3_G3.git
 # :memo: Requisitos
 ### Histórico de Lançamentos
 
+  * v6.1.0 :label: [Requisito 6](https://github.com/Joaquimborges/bootcamp_w3_G3/releases/tag/v6.1.0)	
+     * Atendendo o requisito 6, individual! nova feature carteira para auxiliar no pagamento dos produtos.
+
   * v5.0.0 :label: [Requisito 5](https://github.com/Joaquimborges/bootcamp_w3_G3/releases/tag/v5.0.0)	
      * Atendendo o requisito 5 e feito todos testes unitários e de integração.
 

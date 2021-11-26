@@ -56,6 +56,8 @@ public class CarrinhoIntegrationTest {
     @Autowired
     private CompradorService compradorService;
     @Autowired
+    private CarteiraService carteiraService;
+    @Autowired
     private ItensService itensService;
     @Autowired
     private CarrinhoService carrinhoService;
@@ -128,6 +130,10 @@ public class CarrinhoIntegrationTest {
                 .build()
         ;
         this.compradorService.salvar(novoComprador);
+
+        Carteira carteira = carteiraService.obter(novoComprador.getCarteira().getNumero());
+        carteira.setSaldo(1000.0);
+        carteiraService.atualizar(carteira);
     }
 
     private ProdutoForm payLoadProduto111() {
@@ -217,7 +223,7 @@ public class CarrinhoIntegrationTest {
 
         return ItensForm.builder()
                 .codigoDoProduto(produtoForm.getCodigoDoProduto())
-                .quantidade(10000)
+                .quantidade(5)
                 .build();
     }
 
@@ -226,7 +232,7 @@ public class CarrinhoIntegrationTest {
 
         return ItensForm.builder()
                 .codigoDoProduto(produtoForm.getCodigoDoProduto())
-                .quantidade(20000)
+                .quantidade(7)
                 .build();
     }
 
@@ -235,7 +241,7 @@ public class CarrinhoIntegrationTest {
 
         return ItensForm.builder()
                 .codigoDoProduto(produtoForm.getCodigoDoProduto())
-                .quantidade(30000)
+                .quantidade(10)
                 .build();
     }
 
@@ -244,7 +250,7 @@ public class CarrinhoIntegrationTest {
 
         return ItensForm.builder()
                 .codigoDoProduto(produtoForm.getCodigoDoProduto())
-                .quantidade(40000)
+                .quantidade(5)
                 .build();
     }
 
@@ -253,7 +259,7 @@ public class CarrinhoIntegrationTest {
 
         return ItensForm.builder()
                 .codigoDoProduto(produtoForm.getCodigoDoProduto())
-                .quantidade(50000)
+                .quantidade(4)
                 .build();
     }
 

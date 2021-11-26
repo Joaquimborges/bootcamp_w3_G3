@@ -75,6 +75,7 @@ public class CompradorService {
         compradorEdited.setSobrenome(comprador.getSobrenome());
         compradorEdited.setTelefone(comprador.getTelefone());
         compradorEdited.setEndereco(comprador.getEndereco());
+        compradorEdited.setCarteira(comprador.getCarteira());
 
         return compradorRepository.save(compradorEdited);
     }
